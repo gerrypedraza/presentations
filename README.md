@@ -2,6 +2,8 @@
 
 A collection of talks by Gerry Pedraza, with the templates, examples and tools that go with them. Each presentation has its own folder under [`slides/`](slides/).
 
+**View online:** https://gerrypedraza.github.io/presentations/
+
 ## Presentations
 
 | Presentation | Topic | Folder |
@@ -19,7 +21,7 @@ A shared vocabulary for the eSAIL team: what agentic AI is, who's conducting the
 
 ## Viewing the slides
 
-The HTML slide decks are plain HTML and need no build step. Open a deck's `index.html` in any browser, or use the published site. The slides are built to be accessible: real headings and lists, alt text on every image, full keyboard control, and slide changes announced to screen readers.
+The HTML slide decks are plain HTML and need no build step. Open a deck's `index.html` in any browser, or use the [published site](https://gerrypedraza.github.io/presentations/). Each deck lives at `https://gerrypedraza.github.io/presentations/slides/<folder>/`. The slides are built to be accessible: real headings and lists, alt text on every image, full keyboard control, and slide changes announced to screen readers.
 
 ## Related resources
 
