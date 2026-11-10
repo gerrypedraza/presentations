@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic AI</title>
+<!--
+  Accessible HTML Slide Template
+
+  HOW TO USE
+  - Each slide is a <section class="slide ..."> with one heading.
+    Copy a slide, change its text, delete the slides you don't need.
+  - Navigate: Right/Left arrows, Page Up/Down, Space, Home, End.
+  - Handout view (all slides as tiles, best for screen readers and
+    printing): press H or use the "Handout view" button. Click a tile, or
+    its "Slide N" button, to present from that slide.
+  - Every informative image needs alt text (~120-150 characters max);
+    put longer detail in the slide text or a linked description.
+    Decorative images use alt="" so screen readers skip them.
+  - Glossary: press G or use the "Glossary" button. Terms live in the
+    <dialog id="glossary"> near the end of the file, grouped under <h3>s.
+  - Colors are set once in :root below. Keep text contrast at 4.5:1 or more.
+-->
+<style>
+  :root {
+    /* Color palette.
+       Primary: maroon and white. Secondary: neutrals and dark tones
+       for background floods, hierarchy and grounding. Accents: sparingly.
+       Text pairings (contrast with white / with #202020):
+         maroon 15.7 / -     dark maroon 17.6 / -   light maroon 9.6 / -
+         #202020 16.3 / -    #3E3E3E 10.7 / -       #707070 5.0 / -  (white text: large or bold only)
+         #D1D1D1  -  / 10.7  sand #D6D3C4  -  / 10.8 */
+    --maroon: #500000;        /* maroon (primary) */
+    --white: #ffffff;         /* primary */
+    --gray-900: #202020;      /* secondary */
+    --gray-700: #3e3e3e;      /* secondary */
+    --gray-500: #707070;      /* secondary */
+    --gray-200: #d1d1d1;      /* secondary */
+    --sand: #d6d3c4;          /* secondary */
+    --maroon-dark: #3c0000;   /* accent, use sparingly */
+    --maroon-light: #732f2f;  /* accent, use sparingly */
+
+    /* Roles used by the layouts (change these to restyle the deck) */
+    --accent: var(--maroon);
+    --accent-dark: var(--maroon-dark);
+    --heading: var(--maroon-light);   /* slide titles: Light Maroon, 9.6:1 on white */
+    --accent-soft: color-mix(in srgb, var(--sand) 45%, #ffffff);  /* light tint for highlights */
+    --ink: var(--gray-900);   /* body text */
+    --muted: var(--gray-700); /* secondary text (10.7:1 on white) */
+    --paper: var(--white);    /* slide background */
+    --stage: var(--gray-900); /* area around the slide */
+    --focus: #1a5fb4;              /* keyboard focus outline: blue on purpose, so it
+                                      stays visible on maroon, gray and white */
+    --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--stage);
+    color: var(--ink);
+    font-family: var(--font);
+  }
+
+  /* ---------- Deck and slide frame (16:9, scales to the window) ---------- */
+  .deck {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+  }
+  /* --slide-w is the slide's width. Text size is a fixed ratio of it, so a
+     slide looks the same at any size: full screen, a tile, or a printed page. */
+  :root { --slide-w: min(100vw, calc(100vh * 16 / 9)); }
+  .slide {
+    position: relative;
+    width: var(--slide-w);
+    aspect-ratio: 16 / 9;
+    background: var(--paper);
+    overflow: hidden;
+    font-size: calc(var(--slide-w) * 0.024);   /* all sizes below are in em */
+    line-height: 1.35;
+    padding: 6% 7% 7%;
+    display: flex;
+    flex-direction: column;
+  }
+  .slide[hidden] { display: none; }
+
+  .slide h1, .slide h2 { margin: 0 0 0.6em; line-height: 1.15; }
+  .slide h1 { font-size: 2.6em; }
+  .slide h2 { font-size: 1.75em; color: var(--heading); }
+  .slide h2:focus, .slide h1:focus { outline: none; }
+
+  .slide ul, .slide ol { margin: 0; padding-left: 1.2em; }
+  .slide li { margin: 0 0 0.55em; }
+  .slide li::marker { color: var(--accent); }
+  .slide p { margin: 0 0 0.6em; }
+
+  .slide a { color: var(--accent); text-underline-offset: 0.15em; }
+  .slide :not(pre) > code { font-size: 0.85em; }   /* inline code matches text size */
+
+  /* Footer line on content slides */
+  .slide .footer {
+    position: absolute;
+    left: 7%; right: 7%; bottom: 3.5%;
+    display: flex; justify-content: space-between;
+    font-size: 0.55em; color: var(--muted);
+    border-top: 0.12em solid var(--accent);
+    padding-top: 0.6em;
+  }
+
+  /* ---------- Layouts ---------- */
+
+  /* Title slide */
+  .slide--title {
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: #ffffff;
+  }
+  .slide--title .subtitle { font-size: 1.2em; margin-bottom: 1.6em; opacity: 0.95; }
+  .slide--title .meta { font-size: 0.85em; border-left: 0.2em solid #ffffff; padding-left: 0.8em; }
+  .slide--title .meta p { margin: 0.15em 0; }
+  /* Optional logo in the title slide's bottom-right corner. Decorative
+     (alt=""): the slide's text carries the meaning. Use a light version on
+     the maroon. */
+  .slide--title .title-logo {
+    position: absolute; right: 7%; bottom: 8%;
+    height: 2.3em; width: auto; opacity: 0.95;
+  }
+
+  /* Chapter (section divider) slide */
+  .slide--chapter {
+    justify-content: center;
+    background: var(--accent);
+    color: #ffffff;
+  }
+  .slide--chapter .chapter-number {
+    font-size: 0.9em; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.4em;
+  }
+  .slide--chapter h2 { color: #ffffff; font-size: 2.4em; }
+  .slide--chapter .chapter-lead { font-size: 1.05em; max-width: 70%; opacity: 0.95; }
+
+  /* Agenda: numbered list in two columns when long */
+  .slide--agenda ol { columns: 2; column-gap: 3em; font-size: 1.05em; }
+  .slide--agenda li { break-inside: avoid; }
+  /* Agenda items can link to their chapter slide (href="#N"): same color as
+     the text; Light Maroon and underlined on hover; no visited color */
+  .slide--agenda a, .slide--agenda a:visited { color: inherit; text-decoration: none; }
+  .slide--agenda a:hover { color: var(--maroon-light); text-decoration: underline; }
+
+  /* Text left, image right (and the reverse) */
+  .split {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5%;
+    align-items: center;
+    min-height: 0;
+  }
+  .split--reverse .split-text { order: 2; }
+  .split--reverse .split-media { order: 1; }
+  .split-media { margin: 0; min-height: 0; }
+  .split-media img { width: 100%; max-height: 100%; object-fit: contain; display: block; }
+
+  figure figcaption {
+    font-size: 0.6em; color: var(--muted); margin-top: 0.5em;
+  }
+
+  /* Title and full-width image */
+  .slide--image .full-figure {
+    flex: 1; margin: 0; min-height: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .slide--image .full-figure img {
+    max-width: 100%; max-height: 92%; object-fit: contain; display: block;
+  }
+
+
+  /* Example: a screenshot or graphic with a short description underneath.
+     The description is small (about 12 pt on a standard slide) and sits
+     above the footer. */
+  .slide--example .example-figure {
+    flex: 1; margin: 0; min-height: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slide--example .example-figure img {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+    border: 1px solid var(--gray-200);
+  }
+  .slide--example .example-note {
+    font-size: 0.52em; line-height: 1.45; color: var(--muted);
+    margin: 0.9em 0 0; max-width: 62em;
+  }
+  .slide--example .example-note p { margin: 0 0 0.4em; }
+
+  /* Full-bleed image with a key phrase */
+  .slide--bleed { padding: 0; justify-content: center; align-items: center; }
+  .slide--bleed .bleed-image {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  }
+  .slide--bleed .key-phrase {
+    position: relative;
+    max-width: 70%;
+    background: rgba(255, 255, 255, 0.78);   /* translucent white box */
+    padding: 1em 1.4em;
+    border-radius: 0.3em;
+    text-align: center;
+  }
+  .slide--bleed .key-phrase h2 {
+    margin: 0;
+    color: var(--ink);
+    font-size: 2em;
+    text-shadow: 0 0.04em 0.12em rgba(0, 0, 0, 0.35);   /* subtle shadow */
+  }
+
+  /* Conclusion: highlighted takeaways */
+  .slide--conclusion ul { list-style: none; padding: 0; }
+  .slide--conclusion li {
+    background: var(--accent-soft);
+    border-left: 0.25em solid var(--accent);
+    padding: 0.5em 0.8em;
+  }
+
+  /* Contact */
+  .slide--contact dl {
+    display: grid; grid-template-columns: max-content 1fr; gap: 0.6em 1.2em; margin: 0;
+  }
+  .slide--contact dt { font-weight: 700; color: var(--accent); }
+  .slide--contact dd { margin: 0; overflow-wrap: anywhere; }
+  .slide--contact .credit { margin-top: 1.4em; font-size: 0.8em; color: var(--muted); }
+
+  /* Thank you */
+  .slide--thanks {
+    justify-content: center; align-items: center; text-align: center;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: #ffffff;
+  }
+  .slide--thanks h2 { color: #ffffff; font-size: 3em; }
+  .slide--thanks a { color: #ffffff; }
+
+
+  /* Code and explanation: explanation left (30%), code right (70%) */
+  .code-split {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    gap: 4%;
+    min-height: 0;
+  }
+  .code-split .explain { align-self: center; font-size: 0.85em; }
+  .code-split .explain ul { padding-left: 1.1em; }
+  .code-split pre.code { font-size: 0.58em; }
+
+  /* Code blocks: dark panel, line numbers, LaTeX highlighting */
+  pre.code {
+    margin: 0;
+    min-height: 0;
+    overflow: auto;
+    background: var(--gray-900);
+    color: #e6e6e6;
+    border-radius: 0.3em;
+    padding: 0.8em 1em;
+    font: 0.5em/1.5 ui-monospace, "Cascadia Code", Consolas, "Courier New", monospace;
+    counter-reset: line;
+    tab-size: 2;
+  }
+  pre.code:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  pre.code .ln { white-space: pre; }   /* inline: each line ends with its own newline */
+  pre.code .ln::before {
+    counter-increment: line;
+    content: counter(line) / "";          /* line numbers are not read aloud */
+    display: inline-block;
+    width: 2.6em; margin-right: 1.2em;
+    text-align: right; color: #8b949e;
+  }
+  pre.code .tok-cmd   { color: #ff9e9e; }                 /* \commands */
+  pre.code .tok-com   { color: #9fb3c8; font-style: italic; } /* % comments */
+  pre.code .tok-brace { color: #ffd479; }                 /* { } [ ] */
+
+  /* File viewer: a scrollable file with a header bar */
+  .file-view { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+  .file-view .file-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--gray-700); color: #ffffff;
+    font-size: 0.55em; padding: 0.5em 1em;
+    border-radius: 0.3em 0.3em 0 0;
+  }
+  .file-view .file-bar a { color: #ffd479; }
+  .file-view pre.code { flex: 1; border-radius: 0 0 0.3em 0.3em; }
+
+
+  /* ---------- Chapter divider with photo ----------
+     Default: light card (highest contrast). Variants: add chapter--gradient
+     (maroon fade) or chapter--panel (dark panel) to the <section>.
+     Photos with empty space on the left work best. The photo is decorative
+     here (alt=""), because the slide's meaning is in its text. */
+  .slide--chapter-image { padding: 0; justify-content: center; background: var(--gray-900); }
+  .slide--chapter-image .bg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: right center;
+  }
+  .slide--chapter-image .chapter-content { position: relative; z-index: 2; }
+  .slide--chapter-image .chapter-number {
+    font-size: 0.9em; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.4em;
+  }
+  .slide--chapter-image h2 { font-size: 1.9em; margin-bottom: 0.5em; }
+  .slide--chapter-image .chapter-lead { font-size: 1.05em; margin: 0; }
+
+  /* Default: light card, dark text, a touch of white glow to lift the text */
+  .slide--chapter-image .chapter-content {
+    width: 42%; margin-left: 6%;
+    background: rgba(255, 255, 255, 0.90);
+    border-top: 0.3em solid var(--accent);
+    border-radius: 0.3em;
+    padding: 1.2em 1.4em;
+    box-shadow: 0 0.3em 1.2em rgba(0, 0, 0, 0.35);
+  }
+  .slide--chapter-image .chapter-number { color: var(--gray-700); font-weight: 700; }
+  .slide--chapter-image h2 { color: var(--heading); }
+  .slide--chapter-image .chapter-lead { color: var(--gray-700); }
+  .slide--chapter-image .chapter-content > * { text-shadow: 0 0 0.12em rgba(255, 255, 255, 0.9); }
+
+  /* Variant: narrower card closer to the edge, for photos whose subject
+     starts near the middle. Add chapter--narrow to the <section>. */
+  .chapter--narrow .chapter-content { width: 33%; margin-left: 4%; }
+  .chapter--narrow h2 { font-size: 1.7em; }
+
+  /* Variant: maroon gradient from the left, white text */
+  .chapter--gradient::before {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(90deg,
+      rgba(60, 0, 0, 0.94) 0%, rgba(60, 0, 0, 0.90) 38%,      /* #3C0000 dark maroon */
+      rgba(80, 0, 0, 0.55) 52%, rgba(80, 0, 0, 0) 68%);       /* #500000 maroon */
+  }
+  /* Variant: dark translucent panel on the left half, white text */
+  .chapter--panel .panel {
+    position: absolute; top: 0; bottom: 0; left: 0; width: 50%; z-index: 1;
+    background: rgba(32, 32, 32, 0.80);     /* #202020 */
+    backdrop-filter: blur(4px);
+    border-right: 0.35em solid var(--accent);
+  }
+  .chapter--gradient .chapter-content,
+  .chapter--panel .chapter-content {
+    background: none; border: 0; border-radius: 0; padding: 0; box-shadow: none;
+    margin-left: 7%;
+  }
+  .chapter--gradient .chapter-content { width: 46%; }
+  .chapter--panel .chapter-content { width: 40%; }
+  .chapter--gradient .chapter-content > *,
+  .chapter--panel .chapter-content > * {
+    color: #ffffff; text-shadow: 0 0.05em 0.2em rgba(0, 0, 0, 0.45);
+  }
+  .chapter--gradient .chapter-number, .chapter--panel .chapter-number { font-weight: 400; }
+
+
+  /* Brand palette reference slide */
+  .swatches {
+    list-style: none; padding: 0 !important; margin: 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5em;
+  }
+  .swatches .swatch {
+    margin: 0; padding: 0.5em 0.7em; border-radius: 0.25em;
+    display: flex; flex-direction: column; font-size: 0.6em; line-height: 1.3;
+  }
+  .swatches .swatch strong { font-size: 1.15em; }
+  .swatches .swatch code { color: inherit; }
+  .palette-note { margin-top: 1.6em; font-size: 0.6em; color: var(--muted); }
+
+  /* ---------- Info banner ----------
+     A note at the bottom of a slide, e.g. a link to more details.
+     <div class="info-banner" role="note">
+       <span class="info-icon" aria-hidden="true">i</span>
+       <p>Text with a <a href="...">descriptive link</a></p>
+     </div> */
+  .info-banner {
+    margin-top: auto;                       /* sits at the bottom, above the footer */
+    margin-bottom: 1.4em;
+    display: flex; align-items: center; gap: 0.7em;
+    background: var(--accent-soft);
+    border-left: 0.25em solid var(--accent);
+    border-radius: 0.25em;
+    padding: 0.55em 0.9em;
+    font-size: 0.75em;
+  }
+  .info-banner p { margin: 0; }
+  .info-banner .info-icon {
+    flex: none;
+    width: 1.5em; height: 1.5em; border-radius: 50%;
+    background: var(--accent); color: #ffffff;
+    display: grid; place-items: center;
+    font: italic 700 1em/1 Georgia, "Times New Roman", serif;
+  }
+
+  /* ---------- Background color options (brand palette) ----------
+     Add one class to a <section class="slide ...">. Text color is set to a
+     pairing that passes WCAG AA contrast. */
+  .bg-maroon, .bg-maroon-dark, .bg-maroon-light,
+  .bg-gray-900, .bg-gray-700, .bg-gray-500 { color: #ffffff; }
+  .bg-maroon       { background: var(--maroon); }
+  .bg-maroon-dark  { background: var(--maroon-dark); }
+  .bg-maroon-light { background: var(--maroon-light); }
+  .bg-gray-900     { background: var(--gray-900); }
+  .bg-gray-700     { background: var(--gray-700); }
+  .bg-gray-500     { background: var(--gray-500); }  /* white text 5.0:1: avoid small or thin text */
+  .bg-gray-200     { background: var(--gray-200); }
+  .bg-sand         { background: var(--sand); }
+  /* On dark backgrounds, headings, links and markers turn white */
+  .bg-maroon h2, .bg-maroon-dark h2, .bg-maroon-light h2,
+  .bg-gray-900 h2, .bg-gray-700 h2, .bg-gray-500 h2,
+  .bg-maroon a, .bg-maroon-dark a, .bg-maroon-light a,
+  .bg-gray-900 a, .bg-gray-700 a, .bg-gray-500 a { color: #ffffff; }
+  .bg-maroon li::marker, .bg-maroon-dark li::marker, .bg-maroon-light li::marker,
+  .bg-gray-900 li::marker, .bg-gray-700 li::marker, .bg-gray-500 li::marker { color: #ffffff; }
+  .bg-maroon .footer, .bg-maroon-dark .footer, .bg-maroon-light .footer,
+  .bg-gray-900 .footer, .bg-gray-700 .footer, .bg-gray-500 .footer { color: #ffffff; border-top-color: #ffffff; }
+  /* On light gray and sand, keep maroon headings and dark text */
+  .bg-gray-200 .footer, .bg-sand .footer { color: var(--gray-900); }
+
+
+  /* ---------- Glossary (press G) ----------
+     A dialog over the slides. Esc or the Close button returns to the slide. */
+  .glossary {
+    width: min(66rem, 94vw); max-height: 90vh; padding: 0;
+    border: 0; border-top: 0.35rem solid var(--accent); border-radius: 0.4rem;
+    background: var(--paper); color: var(--ink);
+    font-family: inherit; font-size: 1.25rem; line-height: 1.5;   /* readable when projected */
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.45);
+  }
+  .glossary::backdrop { background: rgba(20, 20, 20, 0.6); }
+  .glossary[open] { display: flex; flex-direction: column; }
+  .glossary-head {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem;
+    padding: 1rem 1.5rem; border-bottom: 1px solid var(--gray-200);
+  }
+  .glossary-head h2 { margin: 0; flex: 1; font-size: 1.6rem; color: var(--heading); }
+  .glossary-head label { font-size: 0.95rem; color: var(--muted); }
+  .glossary-head input {
+    font: inherit; padding: 0.3rem 0.6rem; width: 14rem;
+    border: 1px solid var(--gray-500); border-radius: 0.3rem;
+  }
+  .glossary-close {
+    font: inherit; padding: 0.3rem 0.9rem; cursor: pointer;
+    background: var(--accent); color: #ffffff; border: 0; border-radius: 0.3rem;
+  }
+  .glossary-body { overflow-y: auto; padding: 0.5rem 1.5rem 1.5rem; }
+  .glossary-body h3 {
+    margin: 1.2rem 0 0.4rem; font-size: 1.1rem; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .glossary-body dl { margin: 0; }
+  .glossary-body .term { padding: 0.55rem 0; border-bottom: 1px solid #ecebe6; }
+  .glossary-body dt { font-weight: 700; }
+  .glossary-body dd { margin: 0.15rem 0 0; }
+  .glossary-body a { color: var(--accent); }
+  .glossary-empty { color: var(--muted); }
+
+
+  /* Planned-image placeholder (draft decks only) */
+  .placeholder {
+    align-self: center;
+    border: 0.12em dashed #9a8a8a; border-radius: 0.4em;
+    background: #faf6f6; color: #5a4a4a;
+    padding: 1.2em; font-size: 0.75em; line-height: 1.4;
+    min-height: 60%; display: flex; flex-direction: column; justify-content: center;
+  }
+  .placeholder-label {
+    font-size: 0.8em; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.5em;
+  }
+  .slide .split-text ul { font-size: 0.95em; }
+  .slide .split-media { height: 100%; display: flex; align-items: center; justify-content: center; }
+  .slide .split-media img { width: 100%; height: 100%; object-fit: contain; }
+  .slide--image .full-figure img { width: 100%; height: 100%; max-height: 100%; object-fit: contain; }
+  .slide--dense ul { font-size: 0.88em; }
+  /* Sub-bullets: smaller and tighter so the parent points stay dominant */
+  .slide li > ul { font-size: 0.85em; margin: 0.25em 0 0; }
+  .slide li li { margin-bottom: 0.2em; }
+
+  /* ---------- Additions for "Accessible Math in LaTeX and PDF" ----------
+     Layouts this deck needs that the template doesn't have yet. Same tokens,
+     so they can move into the shared template as is. */
+
+  /* Two or four text columns, each with an h3 */
+  .cols-2, .compare { flex: 1; display: grid; gap: 4%; min-height: 0; align-content: start; }
+  .cols-2 { grid-template-columns: 1fr 1fr; }
+  .compare { grid-template-columns: repeat(4, 1fr); gap: 2.5%; }
+  .cols-2 h3, .compare h3 { margin: 0 0 0.5em; font-size: 1em; color: var(--accent); }
+  .cols-2 ul { font-size: 0.9em; }
+  .compare > div { border-top: 0.2em solid var(--accent); padding-top: 0.6em; }
+  .compare ul { font-size: 0.6em; margin-bottom: 0.5em; }
+  .compare li { margin-bottom: 0.3em; }
+  .compare h3 { font-size: 0.9em; }
+  .compare .compare-label {
+    font-size: 0.62em; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted); margin: 0 0 0.3em;
+  }
+
+  /* Split with a wider text column (e.g. text + QR code) */
+  .split--wide-text { grid-template-columns: 3fr 2fr; }
+  .split--wide-text ol, .split--wide-text > .split-text > ul { font-size: 0.9em; }
+  .qr-figure { flex-direction: column; text-align: center; }
+  .slide .qr-figure img { width: 70%; height: auto; max-height: 70%; }
+  .qr-figure figcaption { font-size: 0.6em; }
+
+  /* Data tables: header row in maroon, group rows in sand */
+  .data-table { border-collapse: collapse; width: 100%; font-size: 0.66em; }
+  .data-table th, .data-table td {
+    text-align: left; padding: 0.35em 0.7em; border-bottom: 1px solid var(--gray-200);
+  }
+  .data-table thead th { background: var(--accent); color: #ffffff; }
+  .data-table tbody th { font-weight: 600; }
+  .data-table tr.group th {
+    background: var(--accent-soft); color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.85em;
+  }
+  .data-table--compare { font-size: 0.75em; }
+  .data-table--dense { font-size: 0.58em; }
+  .data-table--dense th, .data-table--dense td { padding: 0.25em 0.7em; }
+  .data-table--compare td { text-align: center; }
+
+  /* Comparison matrix: row headers left, one column per option */
+  .data-table--matrix { font-size: 0.56em; table-layout: fixed; }
+  .data-table--matrix th, .data-table--matrix td { vertical-align: top; padding: 0.32em 0.6em; }
+  .data-table--matrix thead th:first-child { width: 19%; }
+
+  /* Three screenshot panels with captions */
+  .tag-panels { flex: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3%; min-height: 0; }
+  .tag-panels figure { margin: 0; display: flex; flex-direction: column; min-height: 0; }
+  .tag-panels .placeholder { flex: 1; min-height: 0; align-self: stretch; font-size: 0.6em; }
+  .tag-panels img { flex: 1; min-height: 0; width: 100%; object-fit: contain; }
+  .tag-panels figcaption { margin-top: 0.4em; font-size: 0.66em; font-weight: 600; color: var(--ink); text-align: center; }
+
+  /* Small note under slide content, above the footer */
+  .slide-note { font-size: 0.55em; color: var(--muted); margin: 0.8em 0 1.2em; }
+
+  /* Matrix cells with several short points */
+  .data-table--matrix td p { margin: 0 0 0.35em; }
+  .data-table--matrix tbody th { background: var(--accent-soft); color: var(--accent); }
+  .data-table--matrix thead td { background: transparent; border-bottom-color: transparent; }
+
+  /* Example + evaluation: screenshot left, verdict right */
+  .split--evaluate { grid-template-columns: 3fr 2fr; }
+  .split--evaluate .split-media img { border: 1px solid var(--gray-200); box-shadow: 0 0.15em 0.6em rgba(0,0,0,0.15); width: auto; max-width: 100%; height: auto; max-height: 100%; }
+  .eval-label {
+    font-size: 0.6em; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); margin: 0 0 0.3em;
+  }
+  .eval-example { font-size: 1.05em; font-weight: 700; margin: 0 0 1.4em; }
+  .eval { display: flex; align-items: center; gap: 0.5em; font-size: 1.15em; font-weight: 700; margin: 0; }
+  .eval-icon {
+    flex: none; width: 1.6em; height: 1.6em; border-radius: 50%;
+    display: grid; place-items: center; color: #ffffff; font-size: 0.85em;
+  }
+  .eval--pass { color: #1e6b2a; }          /* 6.6:1 on white */
+  .eval--pass .eval-icon { background: #1e6b2a; }
+  .eval--fail { color: #a4161a; }          /* 7.0:1 on white */
+  .eval--fail .eval-icon { background: #a4161a; }
+
+  /* Long titles that should stay on one line */
+  .slide--long-title h2 { font-size: 1.5em; }
+  /* Dense comparison matrix slide */
+  .slide--matrix h2 { margin-bottom: 0.4em; }
+  .slide--matrix .data-table--matrix { font-size: 0.43em; line-height: 1.3; }
+  .slide--matrix .data-table--matrix tbody th { width: 14%; }
+  .slide--matrix .data-table--matrix thead th:nth-child(4) { width: 27%; }
+  .slide--matrix .data-table--matrix th, .slide--matrix .data-table--matrix td { padding: 0.3em 0.55em; }
+  .slide--matrix .data-table--matrix thead th { font-size: 1.2em; }
+  .slide--matrix .data-table--matrix tbody th { font-size: 1.1em; }
+
+
+  /* ---------- Diagrams (inline SVG) ----------
+     Each diagram fills the space under the slide title. Box styles:
+       .c-gray   neutral: people, plain tools, chat
+       .c-teal   standard steps and parts (white with light-maroon edge)
+       .c-amber  general models, skills (sand)
+       .c-purple goals, agents, emphasis (maroon tint) */
+  .slide--viz { padding-top: 4%; }
+  .slide--viz h2 { font-size: 1.5em; margin-bottom: 0.3em; }
+  .viz {
+    flex: 1; margin: 0 0 1em; min-height: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .viz svg { width: 100%; height: 100%; display: block; }
+  .viz { --s: #707070; }
+  .viz svg text { font-family: var(--font); fill: var(--gray-900); }
+  .viz svg .t  { font-size: 14px; }
+  .viz svg .ts { font-size: 12px; fill: var(--gray-700); }
+  .viz svg .th { font-size: 14px; font-weight: 600; }
+  .viz svg rect.box { fill: #f7f6f2; stroke: #707070; }
+  .viz svg .arr { stroke: #707070; stroke-width: 1.5; fill: none; }
+  .viz svg .c-gray rect   { fill: #f2f2f2; stroke: #707070; }
+  .viz svg .c-teal rect   { fill: #ffffff; stroke: var(--maroon-light); }
+  .viz svg .c-amber rect  { fill: var(--sand); stroke: var(--gray-700); }
+  .viz svg .c-purple rect { fill: #f5e9e9; stroke: var(--maroon); }
+  .viz svg .c-gray text, .viz svg .c-teal text, .viz svg .c-amber text { fill: var(--gray-900); }
+  .viz svg .c-purple text { fill: var(--maroon-dark); }
+  .viz svg .c-gray .ts, .viz svg .c-teal .ts, .viz svg .c-amber .ts { fill: var(--gray-700); }
+  .viz svg .c-purple .ts { fill: var(--maroon-light); }
+  .viz svg .tagline { fill: var(--maroon); }
+
+  /* Planned visual placeholder fills the slide body */
+  .slide .placeholder { flex: 1; min-height: 0; margin-bottom: 1.4em; align-self: stretch; }
+  .slide .placeholder p { margin: 0 0 0.5em; }
+  .slide .placeholder ul { font-size: 0.95em; }
+
+  /* ---------- Controls ---------- */
+  .controls {
+    position: fixed; right: 1rem; top: 1rem;   /* top right: empty on every layout */
+    display: flex; gap: 0.4rem; align-items: center;
+    background: rgba(0, 0, 0, 0.7); color: #ffffff;
+    padding: 0.35rem 0.5rem; border-radius: 0.4rem;
+    font-size: 0.9rem;
+    opacity: 0.35; transition: opacity 0.2s;
+  }
+  .controls:hover, .controls:focus-within { opacity: 1; }
+  .controls button {
+    font: inherit; color: #ffffff; background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 0.3rem;
+    padding: 0.25rem 0.6rem; cursor: pointer;
+  }
+  .controls .counter { min-width: 4.5em; text-align: center; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .controls button:focus-visible { outline-color: #ffffff; }
+
+  .visually-hidden {
+    position: fixed !important; top: 0; left: 0;   /* fixed: never adds page scroll */
+    width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+  }
+
+  /* Slide view never scrolls: the slide always fits the window.
+     (Handout view scrolls normally.) */
+  body:not(.handout) { overflow: hidden; }
+
+  /* ---------- Handout view: all slides as tiles ---------- */
+  /* Click a tile (or its "Go to slide" button) to present from that slide. */
+  body.handout {
+    --cols: 3;
+    --gap: 1.5rem;
+    --slide-w: calc((100vw - 4rem - 20px - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  }
+  @media (max-width: 1100px) { body.handout { --cols: 2; } }
+  @media (max-width: 700px)  { body.handout { --cols: 1; } }
+  body.handout .deck {
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(var(--cols), var(--slide-w));
+    gap: var(--gap);
+    justify-content: center;
+    padding: 4rem 2rem 2rem;
+  }
+  body.handout .slide {
+    box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+  body.handout .slide[hidden] { display: flex; }
+  body.handout .slide:hover { outline: 3px solid #ffffff; }
+
+  /* "Go to slide N" button on each tile (handout view only) */
+  .tile-go { display: none; }
+  body.handout .tile-go {
+    display: block;
+    position: absolute; top: 0.5rem; left: 0.5rem; z-index: 2;
+    font: 600 0.8rem var(--font);
+    color: #ffffff; background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.7); border-radius: 0.3rem;
+    padding: 0.2rem 0.5rem; cursor: pointer;
+  }
+  body.handout .tile-go:focus-visible { outline: 3px solid #ffffff; }
+
+  /* ---------- Print: one slide per page ---------- */
+  @media print {
+    @page { size: landscape; margin: 0; }
+    :root, body.handout { --slide-w: 100vw; }
+    .tile-go { display: none !important; }
+    body { background: #ffffff; }
+    .controls { display: none; }
+    .deck, body.handout .deck { height: auto; display: block; padding: 0; }
+    .slide, .slide[hidden], body.handout .slide[hidden] {
+      display: flex; width: 100vw; break-after: page; box-shadow: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<main class="deck" id="deck">
+
+  <!-- [01] -->
+  <section class="slide slide--title" aria-labelledby="s01">
+    <h1 id="s01">Agentic AI</h1>
+    <p class="subtitle">A shared vocabulary for the eSAIL team: what it is, who&rsquo;s conducting, and how to use it well</p>
+    <div class="meta">
+      <p>Gerry Pedraza</p>
+      <p>Draft: 11/10/26</p>
+    </div>
+    <img class="title-logo" src="images/institution-logo.svg" alt="">
+  </section>
+
+  <!-- [02] -->
+  <section class="slide slide--chapter" aria-labelledby="s02">
+    <p class="chapter-number">Part 1</p>
+    <h2 id="s02">What Are We Even Talking About?</h2>
+    <p class="chapter-lead">A shared base: what AI and models are, what makes something agentic, and how narrow AI fits in.</p>
+  </section>
+
+  <!-- [03] visual F -->
+  <section class="slide slide--viz" aria-labelledby="s03">
+    <h2 id="s03">From AI to a Model You Can Reach</h2>
+    <figure class="viz">
+<svg viewBox="0 0 680 476" role="img" aria-labelledby="s03-t s03-d"><title id="s03-t">From AI to a model you can reach</title><desc id="s03-d">Artificial intelligence contains machine learning, which produces specialized models (one function) and general models (many tasks via instructions). Three doors (desktop app, command line, your script) reach the same model. Doors, not categories.</desc>
+<defs><marker id="arrowF" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#707070" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="c-gray"><rect x="40" y="24" width="600" height="290" rx="20" stroke-width="0.5"/><text class="th" x="340" y="48" text-anchor="middle" dominant-baseline="central">Artificial intelligence</text><text class="ts" x="340" y="68" text-anchor="middle" dominant-baseline="central">Systems doing tasks that need judgment</text></g>
+<g class="c-purple"><rect x="70" y="88" width="540" height="206" rx="16" stroke-width="0.5"/><text class="th" x="340" y="110" text-anchor="middle" dominant-baseline="central">Machine learning</text><text class="ts" x="340" y="130" text-anchor="middle" dominant-baseline="central">Learns patterns from data, not hand-written rules</text></g>
+<g class="c-teal"><rect x="100" y="156" width="230" height="84" rx="8" stroke-width="0.5"/><text class="th" x="215" y="178" text-anchor="middle" dominant-baseline="central">Specialized models</text><text class="ts" x="215" y="198" text-anchor="middle" dominant-baseline="central">One function</text><text class="ts" x="215" y="220" text-anchor="middle" dominant-baseline="central">Captions, risk scores, OCR</text></g>
+<g class="c-amber"><rect x="350" y="156" width="230" height="84" rx="8" stroke-width="1"/><text class="th" x="465" y="178" text-anchor="middle" dominant-baseline="central">General models</text><text class="ts" x="465" y="198" text-anchor="middle" dominant-baseline="central">Many tasks via instructions</text><text class="ts" x="465" y="220" text-anchor="middle" dominant-baseline="central">Opus, GPT, Gemini</text></g>
+<text class="ts" x="100" y="260" dominant-baseline="central">A model = the trained result:</text>
+<text class="ts" x="100" y="278" dominant-baseline="central">learned patterns, input to output</text>
+<g class="c-gray"><rect x="60" y="352" width="170" height="44" rx="8" stroke-width="0.5"/><text class="t" x="145" y="374" text-anchor="middle" dominant-baseline="central">Desktop app</text></g>
+<g class="c-gray"><rect x="255" y="352" width="170" height="44" rx="8" stroke-width="0.5"/><text class="t" x="340" y="374" text-anchor="middle" dominant-baseline="central">Command line</text></g>
+<g class="c-gray"><rect x="450" y="352" width="170" height="44" rx="8" stroke-width="0.5"/><text class="t" x="535" y="374" text-anchor="middle" dominant-baseline="central">Your script (API)</text></g>
+<line x1="145" y1="350" x2="420" y2="244" class="arr" marker-end="url(#arrowF)"/>
+<line x1="340" y1="350" x2="455" y2="244" class="arr" marker-end="url(#arrowF)"/>
+<line x1="535" y1="350" x2="490" y2="244" class="arr" marker-end="url(#arrowF)"/>
+<text class="th tagline" x="340" y="430" text-anchor="middle" dominant-baseline="central">Doors, not categories.</text>
+<text class="ts" x="340" y="452" text-anchor="middle" dominant-baseline="central">The same model can sit behind each door.</text>
+</svg>
+    </figure>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [04] visual G -->
+  <section class="slide slide--viz" aria-labelledby="s04">
+    <h2 id="s04">Doors to the Model</h2>
+    <figure class="viz">
+<svg viewBox="0 0 680 404" role="img" aria-labelledby="s04-t s04-d"><title id="s04-t">Doors to the model</title><desc id="s04-d">Four doors: chat app, assistant inside your tools, command line, your script (API), each with its capabilities. Saved setups (instructions, files, skills) ride on any door; custom GPTs and Gems are becoming skills. Same model; the door decides what it can reach.</desc>
+<g class="c-teal"><rect x="40" y="30" width="285" height="96" rx="12" stroke-width="0.5"/><text class="th" x="182" y="54" text-anchor="middle" dominant-baseline="central">Chat app</text><text class="ts" x="182" y="80" text-anchor="middle" dominant-baseline="central">Sandbox, connectors, projects</text><text class="ts" x="182" y="102" text-anchor="middle" dominant-baseline="central">Easiest start; vendor runs it</text></g>
+<g class="c-teal"><rect x="355" y="30" width="285" height="96" rx="12" stroke-width="0.5"/><text class="th" x="497" y="54" text-anchor="middle" dominant-baseline="central">Assistant inside your tools</text><text class="ts" x="497" y="80" text-anchor="middle" dominant-baseline="central">Copilot in Word, Gemini in Docs</text><text class="ts" x="497" y="102" text-anchor="middle" dominant-baseline="central">Works on the file you have open</text></g>
+<g class="c-teal"><rect x="40" y="146" width="285" height="96" rx="12" stroke-width="0.5"/><text class="th" x="182" y="170" text-anchor="middle" dominant-baseline="central">Command line</text><text class="ts" x="182" y="196" text-anchor="middle" dominant-baseline="central">Works on files on your computer</text><text class="ts" x="182" y="218" text-anchor="middle" dominant-baseline="central">Runs commands; for technical users</text></g>
+<g class="c-teal"><rect x="355" y="146" width="285" height="96" rx="12" stroke-width="0.5"/><text class="th" x="497" y="170" text-anchor="middle" dominant-baseline="central">Your script (API)</text><text class="ts" x="497" y="196" text-anchor="middle" dominant-baseline="central">Does exactly what you code</text><text class="ts" x="497" y="218" text-anchor="middle" dominant-baseline="central">One-job tool, workflow, or agent</text></g>
+<g class="c-purple"><rect x="40" y="266" width="600" height="60" rx="12" stroke-width="0.5"/><text class="th" x="340" y="286" text-anchor="middle" dominant-baseline="central">Saved setups ride on any door</text><text class="ts" x="340" y="308" text-anchor="middle" dominant-baseline="central">Instructions + files + skills. Custom GPTs and Gems are becoming skills.</text></g>
+<text class="th tagline" x="340" y="358" text-anchor="middle" dominant-baseline="central">Same model. The door decides what it can reach.</text>
+<text class="ts" x="340" y="380" text-anchor="middle" dominant-baseline="central">Then the spectrum test decides what's happening.</text>
+</svg>
+    </figure>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [05] visual A -->
+  <section class="slide slide--viz" aria-labelledby="s05">
+    <h2 id="s05">Agentic AI: A Working Definition</h2>
+    <figure class="viz">
+<svg viewBox="0 0 680 474" role="img" aria-labelledby="s05-t s05-d"><title id="s05-t">Agentic AI: working definition</title><desc id="s05-d">A working definition of agentic AI, its three ingredients (goal, tools, loop), and a spectrum showing who decides the next step: a human in chat, a script in a workflow, or the model in an agent. Anthropic counts workflows and agents as agentic systems.</desc>
+<defs><marker id="arrowA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#707070" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect class="box" x="55" y="30" width="565" height="116" rx="8" stroke-width="0.5"/>
+<text class="th" x="337" y="54" text-anchor="middle" dominant-baseline="central">Working definition</text>
+<text class="t" x="337" y="82" text-anchor="middle" dominant-baseline="central">The AI decides its own next step toward a goal. It acts on</text>
+<text class="t" x="337" y="104" text-anchor="middle" dominant-baseline="central">things outside the conversation, checks the results, and adjusts,</text>
+<text class="t" x="337" y="126" text-anchor="middle" dominant-baseline="central">repeating until the goal is met or it needs a human.</text>
+<text class="ts" x="337" y="170" text-anchor="middle" dominant-baseline="central">Three ingredients</text>
+<g class="c-purple"><rect x="55" y="186" width="175" height="56" rx="8" stroke-width="0.5"/><text class="th" x="142" y="204" text-anchor="middle" dominant-baseline="central">Goal</text><text class="ts" x="142" y="224" text-anchor="middle" dominant-baseline="central">Outcome, not a prompt</text></g>
+<g class="c-purple"><rect x="250" y="186" width="175" height="56" rx="8" stroke-width="0.5"/><text class="th" x="337" y="204" text-anchor="middle" dominant-baseline="central">Tools</text><text class="ts" x="337" y="224" text-anchor="middle" dominant-baseline="central">Act outside the chat</text></g>
+<g class="c-purple"><rect x="445" y="186" width="175" height="56" rx="8" stroke-width="0.5"/><text class="th" x="532" y="204" text-anchor="middle" dominant-baseline="central">Loop</text><text class="ts" x="532" y="224" text-anchor="middle" dominant-baseline="central">Act, check, adjust</text></g>
+<text class="th" x="337" y="272" text-anchor="middle" dominant-baseline="central">Not a tight definition: a spectrum</text>
+<text class="ts" x="337" y="292" text-anchor="middle" dominant-baseline="central">Test: who decides the next step?</text>
+<g class="c-gray"><rect x="55" y="308" width="175" height="56" rx="8" stroke-width="0.5"/><text class="th" x="142" y="326" text-anchor="middle" dominant-baseline="central">A human decides</text><text class="ts" x="142" y="346" text-anchor="middle" dominant-baseline="central">Chat: you are the loop</text></g>
+<g class="c-teal"><rect x="250" y="308" width="175" height="56" rx="8" stroke-width="0.5"/><text class="th" x="337" y="326" text-anchor="middle" dominant-baseline="central">A script decides</text><text class="ts" x="337" y="346" text-anchor="middle" dominant-baseline="central">Workflow: fixed path</text></g>
+<g class="c-teal"><rect x="445" y="308" width="175" height="56" rx="8" stroke-width="1"/><text class="th" x="532" y="326" text-anchor="middle" dominant-baseline="central">The model decides</text><text class="ts" x="532" y="346" text-anchor="middle" dominant-baseline="central">Agent: picks its path</text></g>
+<path d="M252 374 L252 382 L618 382 L618 374" fill="none" stroke="var(--s)" stroke-width="0.5"/>
+<text class="ts" x="435" y="398" text-anchor="middle" dominant-baseline="central">Anthropic counts both as agentic systems</text>
+<line x1="60" y1="424" x2="616" y2="424" class="arr" marker-end="url(#arrowA)"/>
+<text class="ts" x="60" y="444" dominant-baseline="central">Less agentic</text>
+<text class="ts" x="616" y="444" text-anchor="end" dominant-baseline="central">More agentic</text>
+</svg>
+    </figure>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [06] visual B -->
+  <section class="slide slide--viz" aria-labelledby="s06">
+    <h2 id="s06">Agent vs. Agency</h2>
+    <figure class="viz">
+<svg viewBox="0 0 680 372" role="img" aria-labelledby="s06-t s06-d"><title id="s06-t">Agent vs. agency: the what and the how</title><desc id="s06-d">Agent means acting on someone's behalf, which maps to the what: a goal set by a human that stays fixed along the spectrum. Agency means discretion, which maps to the how: steps, tools, and recovery, which shift from human to script to model. The human sets the what; the agent gets discretion over the how.</desc>
+<defs><marker id="arrowB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#707070" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="c-purple"><rect x="55" y="30" width="270" height="56" rx="8" stroke-width="0.5"/><text class="th" x="190" y="48" text-anchor="middle" dominant-baseline="central">Agent</text><text class="ts" x="190" y="68" text-anchor="middle" dominant-baseline="central">Acts on someone's behalf</text></g>
+<g class="c-teal"><rect x="355" y="30" width="265" height="56" rx="8" stroke-width="0.5"/><text class="th" x="487" y="48" text-anchor="middle" dominant-baseline="central">Agency</text><text class="ts" x="487" y="68" text-anchor="middle" dominant-baseline="central">Discretion over choices</text></g>
+<line x1="190" y1="88" x2="190" y2="124" class="arr" marker-end="url(#arrowB)"/>
+<line x1="487" y1="88" x2="487" y2="124" class="arr" marker-end="url(#arrowB)"/>
+<g class="c-purple"><rect x="55" y="128" width="270" height="56" rx="8" stroke-width="0.5"/><text class="th" x="190" y="146" text-anchor="middle" dominant-baseline="central">The what</text><text class="ts" x="190" y="166" text-anchor="middle" dominant-baseline="central">Goal set by a human</text></g>
+<g class="c-teal"><rect x="355" y="128" width="265" height="56" rx="8" stroke-width="0.5"/><text class="th" x="487" y="146" text-anchor="middle" dominant-baseline="central">The how</text><text class="ts" x="487" y="166" text-anchor="middle" dominant-baseline="central">Steps, tools, recovery</text></g>
+<line x1="190" y1="186" x2="190" y2="222" class="arr" marker-end="url(#arrowB)"/>
+<line x1="487" y1="186" x2="487" y2="222" class="arr" marker-end="url(#arrowB)"/>
+<rect class="box" x="55" y="226" width="270" height="44" rx="8" stroke-width="0.5"/>
+<text class="t" x="190" y="248" text-anchor="middle" dominant-baseline="central">Stays fixed along the spectrum</text>
+<g class="c-gray"><rect x="355" y="226" width="80" height="44" rx="8" stroke-width="0.5"/><text class="ts" x="395" y="248" text-anchor="middle" dominant-baseline="central">Human</text></g>
+<g class="c-teal"><rect x="447" y="226" width="80" height="44" rx="8" stroke-width="0.5"/><text class="ts" x="487" y="248" text-anchor="middle" dominant-baseline="central">Script</text></g>
+<g class="c-teal"><rect x="539" y="226" width="81" height="44" rx="8" stroke-width="1"/><text class="ts" x="579" y="248" text-anchor="middle" dominant-baseline="central">Model</text></g>
+<line x1="357" y1="286" x2="616" y2="286" class="arr" marker-end="url(#arrowB)"/>
+<text class="ts" x="487" y="304" text-anchor="middle" dominant-baseline="central">Who holds the how shifts</text>
+<text class="th" x="337" y="344" text-anchor="middle" dominant-baseline="central">The human sets the what. The agent gets discretion over the how.</text>
+</svg>
+    </figure>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [07] visual D -->
+  <section class="slide slide--viz" aria-labelledby="s07">
+    <h2 id="s07">Narrow AI vs. Agentic AI</h2>
+    <figure class="viz">
+<svg viewBox="0 0 680 460" role="img" aria-labelledby="s07-t s07-d"><title id="s07-t">Narrow AI vs. agentic AI</title><desc id="s07-d">Narrow AI follows one fixed path: lecture audio into a speech-to-text model, captions out. Agentic AI starts from an open goal and loops through plan, act, and check, calling tools such as a captioning model. Narrow AI does one step; agentic AI chooses the steps, and a narrow model can be one of them.</desc>
+<defs><marker id="arrowD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#707070" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="c-gray"><rect x="40" y="40" width="260" height="340" rx="16" stroke-width="0.5"/><text class="th" x="170" y="64" text-anchor="middle" dominant-baseline="central">Narrow AI</text><text class="ts" x="170" y="84" text-anchor="middle" dominant-baseline="central">One task, fixed path</text></g>
+<rect class="box" x="70" y="108" width="200" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="170" y="126" text-anchor="middle" dominant-baseline="central">Input</text>
+<text class="ts" x="170" y="146" text-anchor="middle" dominant-baseline="central">Lecture audio</text>
+<line x1="170" y1="166" x2="170" y2="196" class="arr" marker-end="url(#arrowD)"/>
+<g class="c-teal"><rect x="70" y="200" width="200" height="56" rx="8" stroke-width="0.5"/><text class="th" x="170" y="218" text-anchor="middle" dominant-baseline="central">One trained function</text><text class="ts" x="170" y="238" text-anchor="middle" dominant-baseline="central">Speech-to-text model</text></g>
+<line x1="170" y1="258" x2="170" y2="288" class="arr" marker-end="url(#arrowD)"/>
+<rect class="box" x="70" y="292" width="200" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="170" y="310" text-anchor="middle" dominant-baseline="central">Output</text>
+<text class="ts" x="170" y="330" text-anchor="middle" dominant-baseline="central">Captions</text>
+<text class="ts" x="170" y="366" text-anchor="middle" dominant-baseline="central">Never decides what's next</text>
+<g class="c-purple"><rect x="330" y="40" width="310" height="340" rx="16" stroke-width="0.5"/><text class="th" x="485" y="64" text-anchor="middle" dominant-baseline="central">Agentic AI</text><text class="ts" x="485" y="84" text-anchor="middle" dominant-baseline="central">Open goal, chooses its path</text></g>
+<g class="c-purple"><rect x="370" y="108" width="230" height="56" rx="8" stroke-width="1"/><text class="th" x="485" y="126" text-anchor="middle" dominant-baseline="central">Goal</text><text class="ts" x="485" y="146" text-anchor="middle" dominant-baseline="central">Make module 3 accessible</text></g>
+<path d="M590 200 L590 184 L394 184 L394 196" fill="none" class="arr" marker-end="url(#arrowD)"/>
+<g class="c-teal"><rect x="352" y="200" width="84" height="44" rx="8" stroke-width="0.5"/><text class="th" x="394" y="222" text-anchor="middle" dominant-baseline="central">Plan</text></g>
+<g class="c-teal"><rect x="450" y="200" width="84" height="44" rx="8" stroke-width="0.5"/><text class="th" x="492" y="222" text-anchor="middle" dominant-baseline="central">Act</text></g>
+<g class="c-teal"><rect x="548" y="200" width="84" height="44" rx="8" stroke-width="0.5"/><text class="th" x="590" y="222" text-anchor="middle" dominant-baseline="central">Check</text></g>
+<line x1="436" y1="222" x2="448" y2="222" class="arr" marker-end="url(#arrowD)"/>
+<line x1="534" y1="222" x2="546" y2="222" class="arr" marker-end="url(#arrowD)"/>
+<text class="ts" x="580" y="272" text-anchor="middle" dominant-baseline="central">Loops until done</text>
+<line x1="492" y1="246" x2="492" y2="296" class="arr" marker-end="url(#arrowD)"/>
+<rect class="box" x="360" y="300" width="250" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="485" y="318" text-anchor="middle" dominant-baseline="central">Tools it can call</text>
+<text class="ts" x="485" y="338" text-anchor="middle" dominant-baseline="central">Captioning model, LMS, files</text>
+<line x1="272" y1="232" x2="358" y2="326" stroke="var(--s)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowD)"/>
+<text class="th tagline" x="340" y="414" text-anchor="middle" dominant-baseline="central">Narrow AI does one step. Agentic AI chooses the steps.</text>
+<text class="ts" x="340" y="436" text-anchor="middle" dominant-baseline="central">And a narrow model can be one of them.</text>
+</svg>
+    </figure>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [08] visual E -->
+  <section class="slide slide--viz" aria-labelledby="s08">
+    <h2 id="s08">One Agent, Many Kinds of Tools</h2>
+    <figure class="viz">
+<svg viewBox="0 0 680 486" role="img" aria-labelledby="s08-t s08-d"><title id="s08-t">One agent, many kinds of tools</title><desc id="s08-d">Goal: an agentic AI podcast with slides. An agent, a general model that researches, writes and decides, calls plain tools (web search, save files, render slides), narrow AI (text-to-speech, speech-to-text) and a general model in one fixed job (an alt-text script). Narrow or agentic describes the job, not the model.</desc>
+<defs><marker id="arrowE" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#707070" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect class="box" x="150" y="24" width="380" height="44" rx="8" stroke-width="0.5"/>
+<text class="t" x="340" y="46" text-anchor="middle" dominant-baseline="central">Goal: an agentic AI podcast with slides</text>
+<line x1="340" y1="70" x2="340" y2="94" class="arr" marker-end="url(#arrowE)"/>
+<g class="c-purple"><rect x="200" y="98" width="280" height="56" rx="8" stroke-width="1"/><text class="th" x="340" y="116" text-anchor="middle" dominant-baseline="central">Agent</text><text class="ts" x="340" y="136" text-anchor="middle" dominant-baseline="central">General model: researches, writes, decides</text></g>
+<line x1="290" y1="156" x2="160" y2="192" class="arr" marker-end="url(#arrowE)"/>
+<line x1="340" y1="156" x2="340" y2="192" class="arr" marker-end="url(#arrowE)"/>
+<line x1="390" y1="156" x2="520" y2="192" class="arr" marker-end="url(#arrowE)"/>
+<g class="c-gray"><rect x="40" y="196" width="186" height="214" rx="12" stroke-width="0.5"/><text class="th" x="133" y="218" text-anchor="middle" dominant-baseline="central">Plain tools</text><text class="ts" x="133" y="236" text-anchor="middle" dominant-baseline="central">No AI inside</text></g>
+<rect class="box" x="55" y="256" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="133" y="276" text-anchor="middle" dominant-baseline="central">Web search</text>
+<rect class="box" x="55" y="306" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="133" y="326" text-anchor="middle" dominant-baseline="central">Save files</text>
+<rect class="box" x="55" y="356" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="133" y="376" text-anchor="middle" dominant-baseline="central">Render slides</text>
+<g class="c-teal"><rect x="247" y="196" width="186" height="214" rx="12" stroke-width="0.5"/><text class="th" x="340" y="218" text-anchor="middle" dominant-baseline="central">Narrow AI</text><text class="ts" x="340" y="236" text-anchor="middle" dominant-baseline="central">Specialized model</text></g>
+<g class="c-teal"><rect x="262" y="256" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="340" y="276" text-anchor="middle" dominant-baseline="central">Text-to-speech</text></g>
+<g class="c-teal"><rect x="262" y="306" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="340" y="326" text-anchor="middle" dominant-baseline="central">Speech-to-text</text></g>
+<g class="c-amber"><rect x="454" y="196" width="186" height="214" rx="12" stroke-width="0.5"/><text class="th" x="547" y="218" text-anchor="middle" dominant-baseline="central">Narrow use</text><text class="ts" x="547" y="236" text-anchor="middle" dominant-baseline="central">General model, one job</text></g>
+<g class="c-amber"><rect x="469" y="256" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="547" y="276" text-anchor="middle" dominant-baseline="central">Alt-text script</text></g>
+<text class="th tagline" x="340" y="442" text-anchor="middle" dominant-baseline="central">Narrow or agentic describes the job, not the model.</text>
+<text class="ts" x="340" y="464" text-anchor="middle" dominant-baseline="central">The same general model can be the agent or a one-job tool.</text>
+</svg>
+    </figure>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [09] -->
+  <section class="slide slide--chapter" aria-labelledby="s09">
+    <p class="chapter-number">Part 2</p>
+    <h2 id="s09">Who&rsquo;s Conducting?</h2>
+    <p class="chapter-lead">Workflows, skills, and agents can run the same steps. What changes is who decides the next one.</p>
+  </section>
+
+  <!-- [10] visual H -->
+  <section class="slide slide--viz" aria-labelledby="s10">
+    <h2 id="s10">Anatomy of a Workflow</h2>
+    <figure class="viz">
+<svg viewBox="0 0 680 310" role="img" aria-labelledby="s10-t s10-d"><title id="s10-t">Anatomy of a workflow</title><desc id="s10-d">A conductor (a script, a no-code flow, or a person with a checklist) runs four steps in a fixed order: extract images (script), describe image (model call), check length (script), save results (plain tool). The workflow is the fixed order, not the scripts.</desc>
+<defs><marker id="arrowH" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#707070" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="c-purple"><rect x="140" y="24" width="400" height="56" rx="8" stroke-width="1"/><text class="th" x="340" y="42" text-anchor="middle" dominant-baseline="central">Conductor: follows a fixed path</text><text class="ts" x="340" y="62" text-anchor="middle" dominant-baseline="central">A script, a no-code flow, or a person with a checklist</text></g>
+<line x1="340" y1="82" x2="340" y2="116" class="arr" marker-end="url(#arrowH)"/>
+<g class="c-teal"><rect x="40" y="120" width="135" height="56" rx="8" stroke-width="0.5"/><text class="th" x="107" y="138" text-anchor="middle" dominant-baseline="central">Extract images</text><text class="ts" x="107" y="158" text-anchor="middle" dominant-baseline="central">Script</text></g>
+<g class="c-amber"><rect x="195" y="120" width="135" height="56" rx="8" stroke-width="0.5"/><text class="th" x="262" y="138" text-anchor="middle" dominant-baseline="central">Describe image</text><text class="ts" x="262" y="158" text-anchor="middle" dominant-baseline="central">Model call</text></g>
+<g class="c-teal"><rect x="350" y="120" width="135" height="56" rx="8" stroke-width="0.5"/><text class="th" x="417" y="138" text-anchor="middle" dominant-baseline="central">Check length</text><text class="ts" x="417" y="158" text-anchor="middle" dominant-baseline="central">Script</text></g>
+<g class="c-gray"><rect x="505" y="120" width="135" height="56" rx="8" stroke-width="0.5"/><text class="th" x="572" y="138" text-anchor="middle" dominant-baseline="central">Save results</text><text class="ts" x="572" y="158" text-anchor="middle" dominant-baseline="central">Plain tool</text></g>
+<line x1="176" y1="148" x2="192" y2="148" class="arr" marker-end="url(#arrowH)"/>
+<line x1="331" y1="148" x2="347" y2="148" class="arr" marker-end="url(#arrowH)"/>
+<line x1="486" y1="148" x2="502" y2="148" class="arr" marker-end="url(#arrowH)"/>
+<path d="M40 188 L40 196 L640 196 L640 188" fill="none" stroke="var(--s)" stroke-width="0.5"/>
+<text class="ts" x="340" y="214" text-anchor="middle" dominant-baseline="central">Steps can be scripts, model calls, tools, or people</text>
+<text class="th tagline" x="340" y="258" text-anchor="middle" dominant-baseline="central">The workflow is the fixed order, not the scripts.</text>
+<text class="ts" x="340" y="282" text-anchor="middle" dominant-baseline="central">Swap the conductor for the model and it becomes an agent.</text>
+</svg>
+    </figure>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [11] visual I -->
+  <section class="slide slide--viz" aria-labelledby="s11">
+    <h2 id="s11">Same Steps, Different Conductor</h2>
+    <figure class="viz">
+<svg viewBox="0 0 680 400" role="img" aria-labelledby="s11-t s11-d"><title id="s11-t">Same steps, different conductor</title><desc id="s11-d">Three columns with the same steps (gather, draft, check). Workflow: a script runs a fixed order, like a machine running a recipe. Guided agent: the model with a skill follows your how but can loop back, like a chef with your recipe card. Open agent: the model alone improvises, like a chef improvising. A skill guides the agent; a workflow replaces it.</desc>
+<defs><marker id="arrowI" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#707070" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="th" x="133" y="26" text-anchor="middle" dominant-baseline="central">Workflow</text>
+<text class="th" x="340" y="26" text-anchor="middle" dominant-baseline="central">Guided agent</text>
+<text class="th" x="547" y="26" text-anchor="middle" dominant-baseline="central">Open agent</text>
+<g class="c-gray"><rect x="40" y="44" width="186" height="56" rx="8" stroke-width="0.5"/><text class="th" x="133" y="62" text-anchor="middle" dominant-baseline="central">Script conducts</text><text class="ts" x="133" y="82" text-anchor="middle" dominant-baseline="central">Runs a fixed order</text></g>
+<g class="c-amber"><rect x="247" y="44" width="186" height="56" rx="8" stroke-width="0.5"/><text class="th" x="340" y="62" text-anchor="middle" dominant-baseline="central">Model + skill</text><text class="ts" x="340" y="82" text-anchor="middle" dominant-baseline="central">Follows your how</text></g>
+<g class="c-purple"><rect x="454" y="44" width="186" height="56" rx="8" stroke-width="0.5"/><text class="th" x="547" y="62" text-anchor="middle" dominant-baseline="central">Model alone</text><text class="ts" x="547" y="82" text-anchor="middle" dominant-baseline="central">Improvises the how</text></g>
+<line x1="133" y1="102" x2="133" y2="130" class="arr" marker-end="url(#arrowI)"/>
+<line x1="340" y1="102" x2="340" y2="130" class="arr" marker-end="url(#arrowI)"/>
+<line x1="547" y1="102" x2="547" y2="130" class="arr" marker-end="url(#arrowI)"/>
+<g class="c-teal"><rect x="63" y="134" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="133" y="152" text-anchor="middle" dominant-baseline="central">Gather</text></g>
+<g class="c-teal"><rect x="63" y="186" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="133" y="204" text-anchor="middle" dominant-baseline="central">Draft</text></g>
+<g class="c-teal"><rect x="63" y="238" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="133" y="256" text-anchor="middle" dominant-baseline="central">Check</text></g>
+<line x1="133" y1="171" x2="133" y2="184" class="arr" marker-end="url(#arrowI)"/>
+<line x1="133" y1="223" x2="133" y2="236" class="arr" marker-end="url(#arrowI)"/>
+<g class="c-teal"><rect x="270" y="134" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="340" y="152" text-anchor="middle" dominant-baseline="central">Gather</text></g>
+<g class="c-teal"><rect x="270" y="186" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="340" y="204" text-anchor="middle" dominant-baseline="central">Draft</text></g>
+<g class="c-teal"><rect x="270" y="238" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="340" y="256" text-anchor="middle" dominant-baseline="central">Check</text></g>
+<line x1="340" y1="171" x2="340" y2="184" class="arr" marker-end="url(#arrowI)"/>
+<line x1="340" y1="223" x2="340" y2="236" class="arr" marker-end="url(#arrowI)"/>
+<path d="M270 256 L256 256 L256 204 L266 204" fill="none" class="arr" marker-end="url(#arrowI)"/>
+<g class="c-teal"><rect x="477" y="134" width="140" height="36" rx="8" stroke-width="0.5" stroke-dasharray="4 3"/><text class="t" x="547" y="152" text-anchor="middle" dominant-baseline="central">Gather</text></g>
+<g class="c-teal"><rect x="477" y="186" width="140" height="36" rx="8" stroke-width="0.5" stroke-dasharray="4 3"/><text class="t" x="547" y="204" text-anchor="middle" dominant-baseline="central">Draft</text></g>
+<g class="c-teal"><rect x="477" y="238" width="140" height="36" rx="8" stroke-width="0.5" stroke-dasharray="4 3"/><text class="t" x="547" y="256" text-anchor="middle" dominant-baseline="central">Check</text></g>
+<line x1="547" y1="171" x2="547" y2="184" class="arr" marker-end="url(#arrowI)"/>
+<line x1="547" y1="223" x2="547" y2="236" class="arr" marker-end="url(#arrowI)"/>
+<path d="M477 256 L463 256 L463 152 L473 152" fill="none" class="arr" marker-end="url(#arrowI)"/>
+<path d="M617 204 L631 204 L631 152 L621 152" fill="none" class="arr" marker-end="url(#arrowI)"/>
+<text class="ts" x="133" y="294" text-anchor="middle" dominant-baseline="central">Machine running a recipe</text>
+<text class="ts" x="340" y="294" text-anchor="middle" dominant-baseline="central">Chef with your recipe card</text>
+<text class="ts" x="547" y="294" text-anchor="middle" dominant-baseline="central">Chef improvising</text>
+<line x1="60" y1="318" x2="616" y2="318" class="arr" marker-end="url(#arrowI)"/>
+<text class="ts" x="60" y="334" dominant-baseline="central">Less autonomy</text>
+<text class="ts" x="616" y="334" text-anchor="end" dominant-baseline="central">More autonomy</text>
+<text class="th tagline" x="340" y="362" text-anchor="middle" dominant-baseline="central">A skill guides the agent. A workflow replaces it.</text>
+<text class="ts" x="340" y="384" text-anchor="middle" dominant-baseline="central">Same steps. What changes is who conducts.</text>
+</svg>
+    </figure>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [12] visual J -->
+  <section class="slide slide--viz" aria-labelledby="s12">
+    <h2 id="s12">Someone Always Conducts the Work</h2>
+    <figure class="viz">
+<svg viewBox="0 32 680 386" role="img" aria-labelledby="s12-t s12-d"><title id="s12-t">Someone always conducts the work</title><desc id="s12-d">Four modes, each defined by who conducts (orchestrates) the work. Chat: you conduct. Workflow: a script conducts a fixed list of steps. Guided agent: the model conducts following a skill. Open agent: the model conducts alone. Someone has to conduct: you, a script, or the model.</desc>
+<defs><marker id="arrowJ" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#707070" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="ts" x="340" y="46" text-anchor="middle" dominant-baseline="central">Conductor = orchestrator: whoever decides the next step</text>
+<g class="c-gray"><rect x="40" y="68" width="142" height="232" rx="12" stroke-width="0.5"/><text class="th" x="111" y="166" text-anchor="middle" dominant-baseline="central">Chat</text><text class="ts" x="111" y="188" text-anchor="middle" dominant-baseline="central">You conduct</text><text class="ts" x="111" y="218" text-anchor="middle" dominant-baseline="central">AI answers turns</text><text class="ts" x="111" y="238" text-anchor="middle" dominant-baseline="central">You act and check</text><text class="ts" x="111" y="258" text-anchor="middle" dominant-baseline="central">You decide next</text></g>
+<g class="c-teal"><rect x="193" y="68" width="142" height="232" rx="12" stroke-width="0.5"/><text class="th" x="264" y="166" text-anchor="middle" dominant-baseline="central">Workflow</text><text class="ts" x="264" y="188" text-anchor="middle" dominant-baseline="central">A script conducts</text><text class="ts" x="264" y="218" text-anchor="middle" dominant-baseline="central">Fixed list of steps</text><text class="ts" x="264" y="238" text-anchor="middle" dominant-baseline="central">Scripts + AI calls</text><text class="ts" x="264" y="258" text-anchor="middle" dominant-baseline="central">Same order always</text></g>
+<g class="c-amber"><rect x="346" y="68" width="142" height="232" rx="12" stroke-width="0.5"/><text class="th" x="417" y="166" text-anchor="middle" dominant-baseline="central">Guided agent</text><text class="ts" x="417" y="188" text-anchor="middle" dominant-baseline="central">Model + skill</text><text class="ts" x="417" y="218" text-anchor="middle" dominant-baseline="central">Follows your how</text><text class="ts" x="417" y="238" text-anchor="middle" dominant-baseline="central">Adapts when needed</text><text class="ts" x="417" y="258" text-anchor="middle" dominant-baseline="central">Asks at checkpoints</text></g>
+<g class="c-purple"><rect x="499" y="68" width="142" height="232" rx="12" stroke-width="1"/><text class="th" x="570" y="166" text-anchor="middle" dominant-baseline="central">Open agent</text><text class="ts" x="570" y="188" text-anchor="middle" dominant-baseline="central">Model conducts</text><text class="ts" x="570" y="218" text-anchor="middle" dominant-baseline="central">Chooses its steps</text><text class="ts" x="570" y="238" text-anchor="middle" dominant-baseline="central">Loops until done</text><text class="ts" x="570" y="258" text-anchor="middle" dominant-baseline="central">Needs most trust</text></g>
+<g fill="none" stroke="var(--s)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="111" cy="104" r="8"/><path d="M95 134 Q111 112 127 134"/>
+<rect x="250" y="96" width="28" height="38" rx="3"/><line x1="256" y1="106" x2="272" y2="106"/><line x1="256" y1="115" x2="272" y2="115"/><line x1="256" y1="124" x2="268" y2="124"/>
+<rect x="397" y="98" width="24" height="24" rx="4"/><line x1="403" y1="94" x2="403" y2="98"/><line x1="415" y1="94" x2="415" y2="98"/><line x1="403" y1="122" x2="403" y2="126"/><line x1="415" y1="122" x2="415" y2="126"/><line x1="393" y1="104" x2="397" y2="104"/><line x1="393" y1="116" x2="397" y2="116"/>
+<rect x="425" y="112" width="16" height="22" rx="2"/><line x1="429" y1="119" x2="437" y2="119"/><line x1="429" y1="126" x2="437" y2="126"/>
+<rect x="558" y="100" width="24" height="24" rx="4"/><line x1="564" y1="96" x2="564" y2="100"/><line x1="576" y1="96" x2="576" y2="100"/><line x1="564" y1="124" x2="564" y2="128"/><line x1="576" y1="124" x2="576" y2="128"/><line x1="554" y1="106" x2="558" y2="106"/><line x1="554" y1="118" x2="558" y2="118"/><line x1="582" y1="106" x2="586" y2="106"/><line x1="582" y1="118" x2="586" y2="118"/>
+<path d="M596 88 L598 94 L604 96 L598 98 L596 104 L594 98 L588 96 L594 94 Z"/>
+</g>
+<line x1="60" y1="322" x2="620" y2="322" class="arr" marker-end="url(#arrowJ)"/>
+<text class="ts" x="60" y="340" dominant-baseline="central">Less AI autonomy</text>
+<text class="ts" x="620" y="340" text-anchor="end" dominant-baseline="central">More AI autonomy</text>
+<text class="th tagline" x="340" y="374" text-anchor="middle" dominant-baseline="central">Someone has to conduct: you, a script, or the model.</text>
+<text class="ts" x="340" y="396" text-anchor="middle" dominant-baseline="central">Ask: who is conducting right now?</text>
+</svg>
+    </figure>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [13] -->
+  <section class="slide slide--chapter" aria-labelledby="s13">
+    <p class="chapter-number">Part 3</p>
+    <h2 id="s13">Using It Well and Safely</h2>
+    <p class="chapter-lead">How to get it, how much to hand over, and how to keep the checking real.</p>
+  </section>
+
+  <!-- [14] visual C -->
+  <section class="slide slide--viz" aria-labelledby="s14">
+    <h2 id="s14">Same Anatomy, Different Names</h2>
+    <figure class="viz">
+<svg viewBox="0 0 680 480" role="img" aria-labelledby="s14-t s14-d"><title id="s14-t">Same anatomy, different names</title><desc id="s14-d">Products such as ChatGPT, Claude, Copilot and Gemini share the same anatomy: a model at the center, connected to a workspace, tools and connectors, persistence, and where it runs. Names change every few months; the anatomy doesn't.</desc>
+<defs><marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#707070" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="c-gray"><rect x="72" y="30" width="120" height="38" rx="8" stroke-width="0.5"/><text class="ts" x="132" y="49" text-anchor="middle" dominant-baseline="central">ChatGPT</text></g>
+<g class="c-gray"><rect x="214" y="30" width="120" height="38" rx="8" stroke-width="0.5"/><text class="ts" x="274" y="49" text-anchor="middle" dominant-baseline="central">Claude</text></g>
+<g class="c-gray"><rect x="356" y="30" width="120" height="38" rx="8" stroke-width="0.5"/><text class="ts" x="416" y="49" text-anchor="middle" dominant-baseline="central">Copilot</text></g>
+<g class="c-gray"><rect x="498" y="30" width="120" height="38" rx="8" stroke-width="0.5"/><text class="ts" x="558" y="49" text-anchor="middle" dominant-baseline="central">Gemini</text></g>
+<line x1="345" y1="72" x2="345" y2="108" class="arr" marker-end="url(#arrowC)"/>
+<g class="c-purple"><rect x="40" y="112" width="600" height="288" rx="20" stroke-width="0.5"/><text class="th" x="340" y="136" text-anchor="middle" dominant-baseline="central">Same anatomy underneath</text></g>
+<g class="c-teal"><rect x="70" y="160" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" x="160" y="178" text-anchor="middle" dominant-baseline="central">Workspace</text><text class="ts" x="160" y="198" text-anchor="middle" dominant-baseline="central">A sandboxed computer</text></g>
+<g class="c-teal"><rect x="430" y="160" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" x="520" y="178" text-anchor="middle" dominant-baseline="central">Tools and connectors</text><text class="ts" x="520" y="198" text-anchor="middle" dominant-baseline="central">Reach sites and apps</text></g>
+<g class="c-teal"><rect x="260" y="236" width="160" height="56" rx="8" stroke-width="1"/><text class="th" x="340" y="254" text-anchor="middle" dominant-baseline="central">Model</text><text class="ts" x="340" y="274" text-anchor="middle" dominant-baseline="central">Does the reasoning</text></g>
+<g class="c-teal"><rect x="70" y="320" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" x="160" y="338" text-anchor="middle" dominant-baseline="central">Persistence</text><text class="ts" x="160" y="358" text-anchor="middle" dominant-baseline="central">Projects and files</text></g>
+<g class="c-teal"><rect x="430" y="320" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" x="520" y="338" text-anchor="middle" dominant-baseline="central">Where it runs</text><text class="ts" x="520" y="358" text-anchor="middle" dominant-baseline="central">Cloud or your computer</text></g>
+<line x1="262" y1="238" x2="240" y2="218" stroke="var(--s)" stroke-width="0.5"/>
+<line x1="418" y1="238" x2="440" y2="218" stroke="var(--s)" stroke-width="0.5"/>
+<line x1="262" y1="290" x2="240" y2="318" stroke="var(--s)" stroke-width="0.5"/>
+<line x1="418" y1="290" x2="440" y2="318" stroke="var(--s)" stroke-width="0.5"/>
+<text class="th tagline" x="340" y="432" text-anchor="middle" dominant-baseline="central">Names change every few months. The anatomy doesn't.</text>
+<text class="ts" x="340" y="456" text-anchor="middle" dominant-baseline="central">Then apply the test: who decides the next step?</text>
+</svg>
+    </figure>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [15] planned visual V4 -->
+  <section class="slide" aria-labelledby="s15">
+    <h2 id="s15">Use, Configure, or Build?</h2>
+    <div class="placeholder" role="note">
+      <p class="placeholder-label">Planned visual (V4)</p>
+      <ul>
+        <li><strong>Use:</strong> turn on agent features in a product you already have. No setup.</li>
+        <li><strong>Configure:</strong> no-code. Connect apps, add instructions, schedule tasks.</li>
+        <li><strong>Build:</strong> code. SDKs and APIs, custom tools, your own hosting.</li>
+      </ul>
+      <p>Most instructional designers will work at levels 1&ndash;2.</p>
+    </div>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [16] planned visual V5 -->
+  <section class="slide" aria-labelledby="s16">
+    <h2 id="s16">The Dial Depends on the Goal</h2>
+    <div class="placeholder" role="note">
+      <p class="placeholder-label">Planned visual (V5)</p>
+      <ul>
+        <li>Being agentic is a setting you choose, not a quality score.</li>
+        <li>Turn it right: speed and less effort, but less understanding and control.</li>
+        <li>Turn it left: more control and learning, at the cost of time and attention.</li>
+      </ul>
+      <p>Choose the setting based on the goal, not on what&rsquo;s possible.</p>
+    </div>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [17] visual K -->
+  <section class="slide slide--viz" aria-labelledby="s17">
+    <h2 id="s17">More Control, More Risk, Unless You Shape It</h2>
+    <figure class="viz">
+<svg viewBox="0 30 680 452" role="img" aria-labelledby="s17-t s17-d"><title id="s17-t">More AI control, more risk, unless you shape it</title><desc id="s17-d">Risk (how far a mistake can travel before a person sees it) rises as the AI conducts more: chat, workflow, guided agent, open agent. Left open, it rises steeply; with guardrails, gently. The gap is your strategy. Levers: clear brief, skill, reference docs, checkpoints, least access. Guardrails lower risk; they never remove it.</desc>
+<defs><marker id="arrowK" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#707070" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="ts" x="340" y="42" text-anchor="middle" dominant-baseline="central">Risk = how far a mistake can travel before a person sees it</text>
+<line x1="90" y1="300" x2="90" y2="78" class="arr" marker-end="url(#arrowK)"/>
+<text class="ts" x="90" y="66" text-anchor="middle" dominant-baseline="central">Risk</text>
+<line x1="90" y1="300" x2="628" y2="300" class="arr" marker-end="url(#arrowK)"/>
+<path d="M110 270 C 300 258, 450 185, 610 92" fill="none" stroke="var(--s)" stroke-width="2" stroke-dasharray="6 5"/>
+<text class="ts" x="606" y="78" text-anchor="end" dominant-baseline="central">Left open: vague goal, broad access</text>
+<path d="M110 278 C 300 274, 450 246, 610 210" fill="none" stroke="var(--s)" stroke-width="2.5"/>
+<text class="ts" x="606" y="248" text-anchor="end" dominant-baseline="central">With guardrails</text>
+<line x1="560" y1="128" x2="560" y2="208" class="arr" marker-start="url(#arrowK)" marker-end="url(#arrowK)"/>
+<text class="th" x="570" y="160" dominant-baseline="central">Your</text>
+<text class="th" x="570" y="178" dominant-baseline="central">strategy</text>
+<text class="th" x="150" y="318" text-anchor="middle" dominant-baseline="central">Chat</text>
+<text class="th" x="290" y="318" text-anchor="middle" dominant-baseline="central">Workflow</text>
+<text class="th" x="430" y="318" text-anchor="middle" dominant-baseline="central">Guided agent</text>
+<text class="th" x="570" y="318" text-anchor="middle" dominant-baseline="central">Open agent</text>
+<text class="ts" x="150" y="338" text-anchor="middle" dominant-baseline="central">You conduct</text>
+<text class="ts" x="290" y="338" text-anchor="middle" dominant-baseline="central">A script</text>
+<text class="ts" x="430" y="338" text-anchor="middle" dominant-baseline="central">Model + skill</text>
+<text class="ts" x="570" y="338" text-anchor="middle" dominant-baseline="central">Model alone</text>
+<text class="ts" x="360" y="360" text-anchor="middle" dominant-baseline="central">How much the AI conducts</text>
+<text class="th tagline" x="340" y="392" text-anchor="middle" dominant-baseline="central">Levers that lower the curve</text>
+<g class="c-teal"><rect x="40" y="408" width="108" height="36" rx="8" stroke-width="0.5"/><text class="ts" x="94" y="426" text-anchor="middle" dominant-baseline="central">Clear brief</text></g>
+<g class="c-teal"><rect x="163" y="408" width="108" height="36" rx="8" stroke-width="0.5"/><text class="ts" x="217" y="426" text-anchor="middle" dominant-baseline="central">Skill</text></g>
+<g class="c-teal"><rect x="286" y="408" width="108" height="36" rx="8" stroke-width="0.5"/><text class="ts" x="340" y="426" text-anchor="middle" dominant-baseline="central">Reference docs</text></g>
+<g class="c-teal"><rect x="409" y="408" width="108" height="36" rx="8" stroke-width="0.5"/><text class="ts" x="463" y="426" text-anchor="middle" dominant-baseline="central">Checkpoints</text></g>
+<g class="c-teal"><rect x="532" y="408" width="108" height="36" rx="8" stroke-width="0.5"/><text class="ts" x="586" y="426" text-anchor="middle" dominant-baseline="central">Least access</text></g>
+<text class="ts" x="340" y="466" text-anchor="middle" dominant-baseline="central">Guardrails lower risk. They never remove it.</text>
+</svg>
+    </figure>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+  <!-- [18] planned visual V6 -->
+  <section class="slide" aria-labelledby="s18">
+    <h2 id="s18">Three Places to Save</h2>
+    <div class="placeholder" role="note">
+      <p class="placeholder-label">Planned visual (V6)</p>
+      <ul>
+        <li><strong>Skill:</strong> how you like the work done, reusable across projects.</li>
+        <li><strong>Memory:</strong> what the assistant should remember about you.</li>
+        <li><strong>Notes:</strong> the project&rsquo;s written state, so work continues between sessions.</li>
+      </ul>
+    </div>
+    <div class="footer" aria-hidden="true"><span>Agentic AI</span><span></span></div>
+  </section>
+
+</main>
+
+<nav class="controls" aria-label="Slide controls">
+  <button type="button" id="prev" aria-label="Previous slide">&larr;</button>
+  <span class="counter" id="counter" aria-hidden="true">1 / 1</span>
+  <button type="button" id="next" aria-label="Next slide">&rarr;</button>
+  <button type="button" id="handout" aria-pressed="false">Handout view</button>
+  <button type="button" id="glossary-open" aria-haspopup="dialog">Glossary</button>
+</nav>
+
+<!-- Glossary: opened with G or the Glossary button. Group terms under <h3>s. -->
+<dialog class="glossary" id="glossary" aria-labelledby="glossary-title">
+  <div class="glossary-head">
+    <h2 id="glossary-title">Glossary</h2>
+    <label for="glossary-filter">Find a term</label>
+    <input type="search" id="glossary-filter" autocomplete="off">
+    <button type="button" class="glossary-close" id="glossary-close">Close</button>
+  </div>
+  <div class="glossary-body" id="glossary-body">
+    <h3>The basics</h3>
+    <dl>
+      <div class="term"><dt>Artificial intelligence (AI)</dt>
+        <dd>The umbrella term for systems that do tasks that normally need human judgment, such as recognizing speech, predicting outcomes, or writing text.</dd></div>
+      <div class="term"><dt>Machine learning</dt>
+        <dd>How most modern AI is made: the system learns patterns from examples instead of following rules someone wrote. A rules-based accessibility checker is not machine learning; nobody trained it.</dd></div>
+      <div class="term"><dt>Model</dt>
+        <dd>What training produces: learned patterns that turn an input into an output. When people say &ldquo;the AI,&rdquo; they usually mean the model.</dd></div>
+      <div class="term"><dt>Specialized model</dt>
+        <dd>A model trained for one function, such as captions, text-to-speech, OCR, or a risk score. It cannot do anything else.</dd></div>
+      <div class="term"><dt>General model (LLM, foundation model)</dt>
+        <dd>A model that learned language broadly, such as Opus, GPT, or Gemini. It can do many tasks depending on the instructions it gets.</dd></div>
+    </dl>
+    <h3>Doors and setups</h3>
+    <dl>
+      <div class="term"><dt>Door (interface)</dt>
+        <dd>How you reach a model: a chat app, an assistant inside your tools, a command line, or your own script. The same model can sit behind each door; the door decides what it can reach.</dd></div>
+      <div class="term"><dt>API</dt>
+        <dd>The way a script talks to a model directly. A script can do exactly what it is coded to do and nothing more.</dd></div>
+      <div class="term"><dt>Connector</dt>
+        <dd>A link that lets an AI app reach another system, such as your email, files, or LMS.</dd></div>
+      <div class="term"><dt>Workspace (sandbox)</dt>
+        <dd>A computer the AI can work in, separate from yours, where it can run code and create files.</dd></div>
+      <div class="term"><dt>Saved setup</dt>
+        <dd>Instructions plus files (plus skills) saved for reuse. Custom GPTs and Gems were saved setups; vendors are moving them into skills.</dd></div>
+      <div class="term"><dt>Skill</dt>
+        <dd>Written guidance, sometimes with scripts or files attached, that the model reads and follows. The model still conducts and can adapt. A skill guides the agent; a workflow replaces it.</dd></div>
+    </dl>
+    <h3>Who decides the next step</h3>
+    <dl>
+      <div class="term"><dt>Narrow AI</dt>
+        <dd>In this talk, reserved for specialized models: one model, one function. &ldquo;Narrow&rdquo; describes scope, not quality.</dd></div>
+      <div class="term"><dt>One-job tool</dt>
+        <dd>Anything that does one fixed step: a specialized model, a general model locked to one instruction (such as an alt-text script), or a plain tool.</dd></div>
+      <div class="term"><dt>Workflow</dt>
+        <dd>Several steps run in an order fixed in advance by a script, a no-code flow, or a person with a checklist. The model may do steps, but it never chooses the path.</dd></div>
+      <div class="term"><dt>Agent</dt>
+        <dd>A system where the model decides its own next step toward a goal, acts on things outside the conversation, checks the results, and adjusts.</dd></div>
+      <div class="term"><dt>Agentic system</dt>
+        <dd>Anthropic&rsquo;s umbrella term covering both workflows and agents.</dd></div>
+      <div class="term"><dt>Agency</dt>
+        <dd>Discretion over how to act. The human sets the what; the agent gets discretion over the how.</dd></div>
+      <div class="term"><dt>Conductor (orchestrator)</dt>
+        <dd>Whoever decides the next step: you in chat, a script in a workflow, or the model in an agent. &ldquo;Orchestrator&rdquo; is the industry term.</dd></div>
+      <div class="term"><dt>Guided agent</dt>
+        <dd>A model that conducts while following a skill: it uses your preferred way of working but can loop back or adjust.</dd></div>
+      <div class="term"><dt>Open agent</dt>
+        <dd>A model that conducts with no skill or set process, improvising its steps.</dd></div>
+    </dl>
+    <h3>Working safely</h3>
+    <dl>
+      <div class="term"><dt>Delegation brief</dt>
+        <dd>A request written like a hand-off to a colleague: outcome, materials, what done looks like, boundaries, and checkpoints.</dd></div>
+      <div class="term"><dt>Plan mode</dt>
+        <dd>A permission checkpoint: the agent may read and research but takes no action until you approve its plan. You can always ask for it in your brief.</dd></div>
+      <div class="term"><dt>Checkpoint</dt>
+        <dd>A planned point where the agent stops and waits for a person to review before continuing.</dd></div>
+      <div class="term"><dt>Least access</dt>
+        <dd>Giving an agent only the files, apps, and permissions the task needs.</dd></div>
+      <div class="term"><dt>Rubber-stamping</dt>
+        <dd>Approving an agent&rsquo;s work by reflex after it has been right several times. A human is in the loop on paper but not in practice.</dd></div>
+      <div class="term"><dt>Prompt injection</dt>
+        <dd>Hidden instructions inside a web page, email, or file that try to steer an agent that reads them.</dd></div>
+    </dl>
+  </div>
+  <p class="visually-hidden" id="glossary-status" role="status" aria-live="polite"></p>
+</dialog>
+
+<!-- Announces each slide change to screen readers -->
+<div class="visually-hidden" id="status" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const counter = document.getElementById('counter');
+  const status = document.getElementById('status');
+  const handoutBtn = document.getElementById('handout');
+  let current = 0;
+
+  function titleOf(slide) {
+    const h = slide.querySelector('h1, h2');
+    return h ? h.textContent.trim() : '';
+  }
+
+  function show(n, moveFocus) {
+    current = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, i) => { s.hidden = (i !== current); });
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+    status.textContent = 'Slide ' + (current + 1) + ' of ' + slides.length + ': ' + titleOf(slides[current]);
+    history.replaceState(null, '', '#' + (current + 1));
+    if (moveFocus) {
+      const h = slides[current].querySelector('h1, h2');
+      if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+    }
+  }
+
+  // Code blocks: split into numbered lines and highlight LaTeX
+  // (\commands, % comments, braces). Plain text stays readable without it.
+  function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function highlightLatex(line) {
+    let out = '', i = 0;
+    const re = /(\\%)|(%.*$)|(\\[A-Za-z@]+|\\.)|([{}\[\]])/g;
+    let m;
+    while ((m = re.exec(line))) {
+      out += esc(line.slice(i, m.index));
+      if (m[1]) out += esc(m[1]);
+      else if (m[2]) out += '<span class="tok-com">' + esc(m[2]) + '</span>';
+      else if (m[3]) out += '<span class="tok-cmd">' + esc(m[3]) + '</span>';
+      else out += '<span class="tok-brace">' + esc(m[4]) + '</span>';
+      i = re.lastIndex;
+    }
+    return out + esc(line.slice(i));
+  }
+  document.querySelectorAll('pre.code > code').forEach((code) => {
+    const latex = code.parentElement.classList.contains('lang-latex');
+    code.innerHTML = code.textContent.split('\n').map((l) =>
+      '<span class="ln">' + (latex ? highlightLatex(l) : esc(l)) + '\n</span>'
+    ).join('');
+  });
+
+  function setHandout(on) {
+    document.body.classList.toggle('handout', on);
+    handoutBtn.setAttribute('aria-pressed', String(on));
+    handoutBtn.textContent = on ? 'Slide view' : 'Handout view';
+    if (on) {
+      slides.forEach(s => { s.hidden = false; });
+      counter.textContent = 'All';
+      status.textContent = 'Handout view: all ' + slides.length + ' slides shown';
+      slides[current].scrollIntoView({ block: 'center' });
+    } else {
+      show(current, true);
+    }
+  }
+
+  // Handout view: a "Go to slide N" button on each tile, and click-to-present
+  function present(i) { setHandout(false); show(i, true); }
+  slides.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tile-go';
+    b.textContent = 'Slide ' + (i + 1);
+    b.setAttribute('aria-label', 'Go to slide ' + (i + 1) + ': ' + titleOf(s));
+    b.addEventListener('click', (e) => { e.stopPropagation(); present(i); });
+    s.prepend(b);
+    s.addEventListener('click', (e) => {
+      if (!document.body.classList.contains('handout')) return;
+      if (e.target.closest('a')) return;   // let links inside a slide work
+      present(i);
+    });
+  });
+
+  // In handout view, Previous/Next return to slide view first
+  function step(d) {
+    if (document.body.classList.contains('handout')) { present(current + d); }
+    else { show(current + d, false); }
+  }
+  document.getElementById('prev').addEventListener('click', () => step(-1));
+  document.getElementById('next').addEventListener('click', () => step(1));
+  handoutBtn.addEventListener('click', () => setHandout(!document.body.classList.contains('handout')));
+
+  // Glossary dialog (G key or button). Native <dialog>: Esc closes it,
+  // focus stays inside while open, and returns to where it was on close.
+  const glossary = document.getElementById('glossary');
+  const gFilter = document.getElementById('glossary-filter');
+  const gStatus = document.getElementById('glossary-status');
+  function openGlossary() {
+    if (glossary.open) return;
+    glossary.showModal();
+    gFilter.focus();
+  }
+  document.getElementById('glossary-open').addEventListener('click', openGlossary);
+  document.getElementById('glossary-close').addEventListener('click', () => glossary.close());
+  glossary.addEventListener('click', (e) => { if (e.target === glossary) glossary.close(); });
+  // Esc always closes (in a search box, browsers would otherwise just clear the text)
+  glossary.addEventListener('keydown', (e) => { if (e.key === 'Escape') { e.preventDefault(); glossary.close(); } });
+  gFilter.addEventListener('input', () => {
+    const q = gFilter.value.trim().toLowerCase();
+    let shown = 0;
+    glossary.querySelectorAll('.term').forEach((t) => {
+      const hit = !q || t.textContent.toLowerCase().includes(q);
+      t.hidden = !hit; if (hit) shown++;
+    });
+    // Hide group headings with no matching terms
+    glossary.querySelectorAll('.glossary-body h3').forEach((h) => {
+      const dl = h.nextElementSibling;
+      h.hidden = dl && ![...dl.querySelectorAll('.term')].some((t) => !t.hidden);
+    });
+    gStatus.textContent = q ? shown + (shown === 1 ? ' term' : ' terms') + ' found' : '';
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    if (glossary.open) return;                       // keys belong to the glossary while it is open
+    const onControl = e.target.closest('button, a, input, textarea, select');
+    // Inside a focused code panel, scrolling keys scroll the panel
+    if (e.target.closest('pre.code') &&
+        ['PageUp', 'PageDown', ' ', 'Home', 'End'].includes(e.key)) return;
+    if (e.key === 'g' || e.key === 'G') { openGlossary(); e.preventDefault(); return; }
+    if (e.key === 'h' || e.key === 'H') { setHandout(!document.body.classList.contains('handout')); return; }
+    if (document.body.classList.contains('handout')) return;
+    switch (e.key) {
+      case 'ArrowRight': case 'PageDown':
+        show(current + 1, true); e.preventDefault(); break;
+      case ' ':
+        if (onControl) return;
+        show(current + 1, true); e.preventDefault(); break;
+      case 'ArrowLeft': case 'PageUp':
+        show(current - 1, true); e.preventDefault(); break;
+      case 'Home': show(0, true); e.preventDefault(); break;
+      case 'End': show(slides.length - 1, true); e.preventDefault(); break;
+    }
+  });
+
+  // Links to a slide number (e.g. <a href="#5"> on the agenda) jump to that slide
+  window.addEventListener('hashchange', () => {
+    const n = parseInt(location.hash.slice(1), 10);
+    if (Number.isNaN(n) || n - 1 === current) return;
+    if (document.body.classList.contains('handout')) present(n - 1); else show(n - 1, true);
+  });
+
+  // Start on the slide in the URL (e.g. index.html#5), or the first slide
+  const start = parseInt(location.hash.slice(1), 10);
+  show(Number.isNaN(start) ? 0 : start - 1, false);
+})();
+</script>
+</body>
+</html>

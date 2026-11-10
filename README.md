@@ -7,7 +7,7 @@ A collection of talks by Gerry Pedraza, with the templates, examples and tools t
 | Presentation | Topic | Folder |
 | --- | --- | --- |
 | [Accessible Media: Beyond the Checker](slides/accessible-media-overview/) | Accessibility | `slides/accessible-media-overview/` |
-| Agentic AI *(in progress)* | AI | `slides/agentic-ai/` |
+| [Agentic AI](slides/agentic-ai/) *(draft)* | AI | `slides/agentic-ai/` |
 
 ### Accessible Media: Beyond the Checker
 
@@ -15,7 +15,7 @@ Why a document can pass an accessibility checker and still fail students. Open i
 
 ### Agentic AI
 
-In progress.
+A shared vocabulary for the eSAIL team: what agentic AI is, who's conducting the work, and how to use it well and safely. Work in progress; working notes and the original visuals are in [`slides/agentic-ai/notes/`](slides/agentic-ai/notes/).
 
 ## Viewing the slides
 

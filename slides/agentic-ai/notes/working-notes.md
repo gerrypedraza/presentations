@@ -444,7 +444,15 @@ The Chat-vs-Work toggle is a product design choice, not the definition. The test
   3. *Using it well and safely.* How do you get it, higher-ed/ID examples, "more agentic isn't automatically better," cautions with visual K, the "built two ways" closer.
 - **Final format changed:** instead of a Slides artifact, the deck will be a full-screen HTML deck in this repo at `slides/agentic-ai/`, matching `slides/accessible-media-overview/` (same slide structure, keyboard navigation, handout view).
 - **Palette:** use the existing deck's maroon tones: `--maroon #500000`, `--maroon-dark #3c0000`, `--maroon-light #732f2f`, `--sand #d6d3c4`, `--white #ffffff`, `--focus #1a5fb4`.
-- **Visuals:** the earlier session also made visual K (risk vs. control), so there are 11 archived visuals (A–I, J, K), not 9. `agentic-ai-visuals-archive.html` still needs to be added to the repo before they can be rebuilt as slides.
+- **Visuals:** there are 11 archived visuals (A–K). The original archive is saved as `notes/visuals-archive.html`.
+- **Deck built (draft):** `slides/agentic-ai/index.html`, 18 slides. All 11 visuals are rebuilt as full-screen slides in the maroon palette, in talk order:
+  1. Title
+  2. Part 1 divider · 3 F From AI to a model · 4 G Doors · 5 A Working definition · 6 B Agent vs. agency · 7 D Narrow vs. agentic · 8 E One agent, many tools
+  9. Part 2 divider · 10 H Anatomy of a workflow · 11 I Same steps, different conductor · 12 J Someone always conducts
+  13. Part 3 divider · 14 C Same anatomy, different names · 15 V4 (placeholder) · 16 V5 (placeholder) · 17 K Risk vs. control · 18 V6 (placeholder)
+  - Small fixes during conversion: the model note in F moved clear of the door arrows; the "With guardrails" label in K moved off its curve; J and K titles moved into the slide headings.
+  - Glossary (press G) built from the agreed vocabulary.
+  - Not yet in the deck: text/table slides (examples table, chat vs. agentic "fix the dates" table, cautions table), higher-ed/ID examples, the "built two ways" closer.
 - **Re-check before the talk:** custom GPT retirement (Dec 11, 2026) and Gems migration (Nov 17, 2026).
 - **Suggested delegation experiment** (from the earlier session), to compare with step-by-step work:
   > Make the three missing visuals for the podcast script (V4: use/configure/build, V5: the dial depends on the goal, V6: three places to save). Match the style of the first three. Give me your plan first; after I approve it, build all three without checking in, update the script's visual cues if anything changes, and give me a short summary of any choices you made.

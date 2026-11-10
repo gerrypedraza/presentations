@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agentic AI Visuals Archive</title>
+<style>
+  /* Backup archive of the inline visuals for the agentic AI talk.
+     The style rules below approximate the chat theme so each SVG renders standalone.
+     Final export will rebuild each visual as a clean, self-contained SVG in talk order. */
+  :root { --s: #888780; }
+  body { font-family: system-ui, sans-serif; background: #ffffff; color: #222; margin: 0 auto; max-width: 760px; padding: 24px 16px; }
+  h1 { font-size: 22px; } h2 { font-size: 16px; margin-top: 40px; } p.note { font-size: 13px; color: #555; }
+  svg { width: 100%; height: auto; display: block; }
+  svg text { font-family: system-ui, sans-serif; fill: #2c2c2a; }
+  svg .t { font-size: 14px; } svg .ts { font-size: 12px; fill: #5f5e5a; } svg .th { font-size: 14px; font-weight: 600; }
+  svg rect.box { fill: #f7f6f2; stroke: #888780; }
+  svg .arr { stroke: #73726c; stroke-width: 1.5; fill: none; }
+  svg .c-gray rect { fill: #F1EFE8; stroke: #888780; } svg .c-gray text { fill: #444441; }
+  svg .c-teal rect { fill: #E1F5EE; stroke: #0F6E56; } svg .c-teal text { fill: #085041; }
+  svg .c-purple rect { fill: #EEEDFE; stroke: #534AB7; } svg .c-purple text { fill: #3C3489; }
+  svg .c-amber rect { fill: #FAEEDA; stroke: #854F0B; } svg .c-amber text { fill: #633806; }
+</style>
+</head>
+<body>
+<h1>Agentic AI talk: visuals archive (backup)</h1>
+<p class="note">Saved 2026-10-27. The visuals are listed in the order they were made, with each one's working label. They will be renumbered in talk order at final export. Three podcast visuals are still to be made: use/configure/build, the dial, and three places to save.</p>
+
+<h2>A. Working definition and spectrum (podcast V1, chunk 1)</h2>
+<svg viewBox="0 0 680 474" role="img"><title>Agentic AI: working definition</title><desc>A working definition of agentic AI, its three ingredients (goal, tools, loop), and a spectrum showing who decides the next step: a human in chat, a script in a workflow, or the model in an agent. Anthropic counts workflows and agents as agentic systems.</desc>
+<defs><marker id="arrowA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect class="box" x="55" y="30" width="565" height="116" rx="8" stroke-width="0.5"/>
+<text class="th" x="337" y="54" text-anchor="middle" dominant-baseline="central">Working definition</text>
+<text class="t" x="337" y="82" text-anchor="middle" dominant-baseline="central">The AI decides its own next step toward a goal. It acts on</text>
+<text class="t" x="337" y="104" text-anchor="middle" dominant-baseline="central">things outside the conversation, checks the results, and adjusts,</text>
+<text class="t" x="337" y="126" text-anchor="middle" dominant-baseline="central">repeating until the goal is met or it needs a human.</text>
+<text class="ts" x="337" y="170" text-anchor="middle" dominant-baseline="central">Three ingredients</text>
+<g class="c-purple"><rect x="55" y="186" width="175" height="56" rx="8" stroke-width="0.5"/><text class="th" x="142" y="204" text-anchor="middle" dominant-baseline="central">Goal</text><text class="ts" x="142" y="224" text-anchor="middle" dominant-baseline="central">Outcome, not a prompt</text></g>
+<g class="c-purple"><rect x="250" y="186" width="175" height="56" rx="8" stroke-width="0.5"/><text class="th" x="337" y="204" text-anchor="middle" dominant-baseline="central">Tools</text><text class="ts" x="337" y="224" text-anchor="middle" dominant-baseline="central">Act outside the chat</text></g>
+<g class="c-purple"><rect x="445" y="186" width="175" height="56" rx="8" stroke-width="0.5"/><text class="th" x="532" y="204" text-anchor="middle" dominant-baseline="central">Loop</text><text class="ts" x="532" y="224" text-anchor="middle" dominant-baseline="central">Act, check, adjust</text></g>
+<text class="th" x="337" y="272" text-anchor="middle" dominant-baseline="central">Not a tight definition: a spectrum</text>
+<text class="ts" x="337" y="292" text-anchor="middle" dominant-baseline="central">Test: who decides the next step?</text>
+<g class="c-gray"><rect x="55" y="308" width="175" height="56" rx="8" stroke-width="0.5"/><text class="th" x="142" y="326" text-anchor="middle" dominant-baseline="central">A human decides</text><text class="ts" x="142" y="346" text-anchor="middle" dominant-baseline="central">Chat: you are the loop</text></g>
+<g class="c-teal"><rect x="250" y="308" width="175" height="56" rx="8" stroke-width="0.5"/><text class="th" x="337" y="326" text-anchor="middle" dominant-baseline="central">A script decides</text><text class="ts" x="337" y="346" text-anchor="middle" dominant-baseline="central">Workflow: fixed path</text></g>
+<g class="c-teal"><rect x="445" y="308" width="175" height="56" rx="8" stroke-width="1"/><text class="th" x="532" y="326" text-anchor="middle" dominant-baseline="central">The model decides</text><text class="ts" x="532" y="346" text-anchor="middle" dominant-baseline="central">Agent: picks its path</text></g>
+<path d="M252 374 L252 382 L618 382 L618 374" fill="none" stroke="var(--s)" stroke-width="0.5"/>
+<text class="ts" x="435" y="398" text-anchor="middle" dominant-baseline="central">Anthropic counts both as agentic systems</text>
+<line x1="60" y1="424" x2="616" y2="424" class="arr" marker-end="url(#arrowA)"/>
+<text class="ts" x="60" y="444" dominant-baseline="central">Less agentic</text>
+<text class="ts" x="616" y="444" text-anchor="end" dominant-baseline="central">More agentic</text>
+</svg>
+
+<h2>B. Agent vs. agency: the what and the how (podcast V2, chunk 1)</h2>
+<svg viewBox="0 0 680 372" role="img"><title>Agent vs. agency: the what and the how</title><desc>Agent means acting on someone's behalf, which maps to the what: a goal set by a human that stays fixed along the spectrum. Agency means discretion, which maps to the how: steps, tools, and recovery, which shift from human to script to model. The human sets the what; the agent gets discretion over the how.</desc>
+<defs><marker id="arrowB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="c-purple"><rect x="55" y="30" width="270" height="56" rx="8" stroke-width="0.5"/><text class="th" x="190" y="48" text-anchor="middle" dominant-baseline="central">Agent</text><text class="ts" x="190" y="68" text-anchor="middle" dominant-baseline="central">Acts on someone's behalf</text></g>
+<g class="c-teal"><rect x="355" y="30" width="265" height="56" rx="8" stroke-width="0.5"/><text class="th" x="487" y="48" text-anchor="middle" dominant-baseline="central">Agency</text><text class="ts" x="487" y="68" text-anchor="middle" dominant-baseline="central">Discretion over choices</text></g>
+<line x1="190" y1="88" x2="190" y2="124" class="arr" marker-end="url(#arrowB)"/>
+<line x1="487" y1="88" x2="487" y2="124" class="arr" marker-end="url(#arrowB)"/>
+<g class="c-purple"><rect x="55" y="128" width="270" height="56" rx="8" stroke-width="0.5"/><text class="th" x="190" y="146" text-anchor="middle" dominant-baseline="central">The what</text><text class="ts" x="190" y="166" text-anchor="middle" dominant-baseline="central">Goal set by a human</text></g>
+<g class="c-teal"><rect x="355" y="128" width="265" height="56" rx="8" stroke-width="0.5"/><text class="th" x="487" y="146" text-anchor="middle" dominant-baseline="central">The how</text><text class="ts" x="487" y="166" text-anchor="middle" dominant-baseline="central">Steps, tools, recovery</text></g>
+<line x1="190" y1="186" x2="190" y2="222" class="arr" marker-end="url(#arrowB)"/>
+<line x1="487" y1="186" x2="487" y2="222" class="arr" marker-end="url(#arrowB)"/>
+<rect class="box" x="55" y="226" width="270" height="44" rx="8" stroke-width="0.5"/>
+<text class="t" x="190" y="248" text-anchor="middle" dominant-baseline="central">Stays fixed along the spectrum</text>
+<g class="c-gray"><rect x="355" y="226" width="80" height="44" rx="8" stroke-width="0.5"/><text class="ts" x="395" y="248" text-anchor="middle" dominant-baseline="central">Human</text></g>
+<g class="c-teal"><rect x="447" y="226" width="80" height="44" rx="8" stroke-width="0.5"/><text class="ts" x="487" y="248" text-anchor="middle" dominant-baseline="central">Script</text></g>
+<g class="c-teal"><rect x="539" y="226" width="81" height="44" rx="8" stroke-width="1"/><text class="ts" x="579" y="248" text-anchor="middle" dominant-baseline="central">Model</text></g>
+<line x1="357" y1="286" x2="616" y2="286" class="arr" marker-end="url(#arrowB)"/>
+<text class="ts" x="487" y="304" text-anchor="middle" dominant-baseline="central">Who holds the how shifts</text>
+<text class="th" x="337" y="344" text-anchor="middle" dominant-baseline="central">The human sets the what. The agent gets discretion over the how.</text>
+</svg>
+
+<h2>C. Same anatomy, different names (podcast V3, "how do you get it")</h2>
+<svg viewBox="0 0 680 480" role="img"><title>Same anatomy, different names</title><desc>Products such as ChatGPT, Claude, Copilot and Gemini share the same anatomy: a model at the center, connected to a workspace, tools and connectors, persistence, and where it runs. Names change every few months; the anatomy doesn't.</desc>
+<defs><marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="c-gray"><rect x="72" y="30" width="120" height="38" rx="8" stroke-width="0.5"/><text class="ts" x="132" y="49" text-anchor="middle" dominant-baseline="central">ChatGPT</text></g>
+<g class="c-gray"><rect x="214" y="30" width="120" height="38" rx="8" stroke-width="0.5"/><text class="ts" x="274" y="49" text-anchor="middle" dominant-baseline="central">Claude</text></g>
+<g class="c-gray"><rect x="356" y="30" width="120" height="38" rx="8" stroke-width="0.5"/><text class="ts" x="416" y="49" text-anchor="middle" dominant-baseline="central">Copilot</text></g>
+<g class="c-gray"><rect x="498" y="30" width="120" height="38" rx="8" stroke-width="0.5"/><text class="ts" x="558" y="49" text-anchor="middle" dominant-baseline="central">Gemini</text></g>
+<line x1="345" y1="72" x2="345" y2="108" class="arr" marker-end="url(#arrowC)"/>
+<g class="c-purple"><rect x="40" y="112" width="600" height="288" rx="20" stroke-width="0.5"/><text class="th" x="340" y="136" text-anchor="middle" dominant-baseline="central">Same anatomy underneath</text></g>
+<g class="c-teal"><rect x="70" y="160" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" x="160" y="178" text-anchor="middle" dominant-baseline="central">Workspace</text><text class="ts" x="160" y="198" text-anchor="middle" dominant-baseline="central">A sandboxed computer</text></g>
+<g class="c-teal"><rect x="430" y="160" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" x="520" y="178" text-anchor="middle" dominant-baseline="central">Tools and connectors</text><text class="ts" x="520" y="198" text-anchor="middle" dominant-baseline="central">Reach sites and apps</text></g>
+<g class="c-teal"><rect x="260" y="236" width="160" height="56" rx="8" stroke-width="1"/><text class="th" x="340" y="254" text-anchor="middle" dominant-baseline="central">Model</text><text class="ts" x="340" y="274" text-anchor="middle" dominant-baseline="central">Does the reasoning</text></g>
+<g class="c-teal"><rect x="70" y="320" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" x="160" y="338" text-anchor="middle" dominant-baseline="central">Persistence</text><text class="ts" x="160" y="358" text-anchor="middle" dominant-baseline="central">Projects and files</text></g>
+<g class="c-teal"><rect x="430" y="320" width="180" height="56" rx="8" stroke-width="0.5"/><text class="th" x="520" y="338" text-anchor="middle" dominant-baseline="central">Where it runs</text><text class="ts" x="520" y="358" text-anchor="middle" dominant-baseline="central">Cloud or your computer</text></g>
+<line x1="262" y1="238" x2="240" y2="218" stroke="var(--s)" stroke-width="0.5"/>
+<line x1="418" y1="238" x2="440" y2="218" stroke="var(--s)" stroke-width="0.5"/>
+<line x1="262" y1="290" x2="240" y2="318" stroke="var(--s)" stroke-width="0.5"/>
+<line x1="418" y1="290" x2="440" y2="318" stroke="var(--s)" stroke-width="0.5"/>
+<text class="th" x="340" y="432" text-anchor="middle" dominant-baseline="central">Names change every few months. The anatomy doesn't.</text>
+<text class="ts" x="340" y="456" text-anchor="middle" dominant-baseline="central">Then apply the test: who decides the next step?</text>
+</svg>
+
+<h2>D. Narrow AI vs. agentic AI (chunk 2)</h2>
+<svg viewBox="0 0 680 460" role="img"><title>Narrow AI vs. agentic AI</title><desc>Narrow AI follows one fixed path: lecture audio into a speech-to-text model, captions out. Agentic AI starts from an open goal and loops through plan, act, and check, calling tools such as a captioning model. Narrow AI does one step; agentic AI chooses the steps, and a narrow model can be one of them.</desc>
+<defs><marker id="arrowD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="c-gray"><rect x="40" y="40" width="260" height="340" rx="16" stroke-width="0.5"/><text class="th" x="170" y="64" text-anchor="middle" dominant-baseline="central">Narrow AI</text><text class="ts" x="170" y="84" text-anchor="middle" dominant-baseline="central">One task, fixed path</text></g>
+<rect class="box" x="70" y="108" width="200" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="170" y="126" text-anchor="middle" dominant-baseline="central">Input</text>
+<text class="ts" x="170" y="146" text-anchor="middle" dominant-baseline="central">Lecture audio</text>
+<line x1="170" y1="166" x2="170" y2="196" class="arr" marker-end="url(#arrowD)"/>
+<g class="c-teal"><rect x="70" y="200" width="200" height="56" rx="8" stroke-width="0.5"/><text class="th" x="170" y="218" text-anchor="middle" dominant-baseline="central">One trained function</text><text class="ts" x="170" y="238" text-anchor="middle" dominant-baseline="central">Speech-to-text model</text></g>
+<line x1="170" y1="258" x2="170" y2="288" class="arr" marker-end="url(#arrowD)"/>
+<rect class="box" x="70" y="292" width="200" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="170" y="310" text-anchor="middle" dominant-baseline="central">Output</text>
+<text class="ts" x="170" y="330" text-anchor="middle" dominant-baseline="central">Captions</text>
+<text class="ts" x="170" y="366" text-anchor="middle" dominant-baseline="central">Never decides what's next</text>
+<g class="c-purple"><rect x="330" y="40" width="310" height="340" rx="16" stroke-width="0.5"/><text class="th" x="485" y="64" text-anchor="middle" dominant-baseline="central">Agentic AI</text><text class="ts" x="485" y="84" text-anchor="middle" dominant-baseline="central">Open goal, chooses its path</text></g>
+<g class="c-purple"><rect x="370" y="108" width="230" height="56" rx="8" stroke-width="1"/><text class="th" x="485" y="126" text-anchor="middle" dominant-baseline="central">Goal</text><text class="ts" x="485" y="146" text-anchor="middle" dominant-baseline="central">Make module 3 accessible</text></g>
+<path d="M590 200 L590 184 L394 184 L394 196" fill="none" class="arr" marker-end="url(#arrowD)"/>
+<g class="c-teal"><rect x="352" y="200" width="84" height="44" rx="8" stroke-width="0.5"/><text class="th" x="394" y="222" text-anchor="middle" dominant-baseline="central">Plan</text></g>
+<g class="c-teal"><rect x="450" y="200" width="84" height="44" rx="8" stroke-width="0.5"/><text class="th" x="492" y="222" text-anchor="middle" dominant-baseline="central">Act</text></g>
+<g class="c-teal"><rect x="548" y="200" width="84" height="44" rx="8" stroke-width="0.5"/><text class="th" x="590" y="222" text-anchor="middle" dominant-baseline="central">Check</text></g>
+<line x1="436" y1="222" x2="448" y2="222" class="arr" marker-end="url(#arrowD)"/>
+<line x1="534" y1="222" x2="546" y2="222" class="arr" marker-end="url(#arrowD)"/>
+<text class="ts" x="580" y="272" text-anchor="middle" dominant-baseline="central">Loops until done</text>
+<line x1="492" y1="246" x2="492" y2="296" class="arr" marker-end="url(#arrowD)"/>
+<rect class="box" x="360" y="300" width="250" height="56" rx="8" stroke-width="0.5"/>
+<text class="th" x="485" y="318" text-anchor="middle" dominant-baseline="central">Tools it can call</text>
+<text class="ts" x="485" y="338" text-anchor="middle" dominant-baseline="central">Captioning model, LMS, files</text>
+<line x1="272" y1="232" x2="358" y2="326" stroke="var(--s)" stroke-width="1" stroke-dasharray="4 4" marker-end="url(#arrowD)"/>
+<text class="th" x="340" y="414" text-anchor="middle" dominant-baseline="central">Narrow AI does one step. Agentic AI chooses the steps.</text>
+<text class="ts" x="340" y="436" text-anchor="middle" dominant-baseline="central">And a narrow model can be one of them.</text>
+</svg>
+
+<h2>E. One agent, many kinds of tools (chunk 2)</h2>
+<svg viewBox="0 0 680 486" role="img"><title>One agent, many kinds of tools</title><desc>Goal: an agentic AI podcast with slides. An agent, a general model that researches, writes and decides, calls plain tools (web search, save files, render slides), narrow AI (text-to-speech, speech-to-text) and a general model in one fixed job (an alt-text script). Narrow or agentic describes the job, not the model.</desc>
+<defs><marker id="arrowE" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect class="box" x="150" y="24" width="380" height="44" rx="8" stroke-width="0.5"/>
+<text class="t" x="340" y="46" text-anchor="middle" dominant-baseline="central">Goal: an agentic AI podcast with slides</text>
+<line x1="340" y1="70" x2="340" y2="94" class="arr" marker-end="url(#arrowE)"/>
+<g class="c-purple"><rect x="200" y="98" width="280" height="56" rx="8" stroke-width="1"/><text class="th" x="340" y="116" text-anchor="middle" dominant-baseline="central">Agent</text><text class="ts" x="340" y="136" text-anchor="middle" dominant-baseline="central">General model: researches, writes, decides</text></g>
+<line x1="290" y1="156" x2="160" y2="192" class="arr" marker-end="url(#arrowE)"/>
+<line x1="340" y1="156" x2="340" y2="192" class="arr" marker-end="url(#arrowE)"/>
+<line x1="390" y1="156" x2="520" y2="192" class="arr" marker-end="url(#arrowE)"/>
+<g class="c-gray"><rect x="40" y="196" width="186" height="214" rx="12" stroke-width="0.5"/><text class="th" x="133" y="218" text-anchor="middle" dominant-baseline="central">Plain tools</text><text class="ts" x="133" y="236" text-anchor="middle" dominant-baseline="central">No AI inside</text></g>
+<rect class="box" x="55" y="256" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="133" y="276" text-anchor="middle" dominant-baseline="central">Web search</text>
+<rect class="box" x="55" y="306" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="133" y="326" text-anchor="middle" dominant-baseline="central">Save files</text>
+<rect class="box" x="55" y="356" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="133" y="376" text-anchor="middle" dominant-baseline="central">Render slides</text>
+<g class="c-teal"><rect x="247" y="196" width="186" height="214" rx="12" stroke-width="0.5"/><text class="th" x="340" y="218" text-anchor="middle" dominant-baseline="central">Narrow AI</text><text class="ts" x="340" y="236" text-anchor="middle" dominant-baseline="central">Specialized model</text></g>
+<g class="c-teal"><rect x="262" y="256" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="340" y="276" text-anchor="middle" dominant-baseline="central">Text-to-speech</text></g>
+<g class="c-teal"><rect x="262" y="306" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="340" y="326" text-anchor="middle" dominant-baseline="central">Speech-to-text</text></g>
+<g class="c-amber"><rect x="454" y="196" width="186" height="214" rx="12" stroke-width="0.5"/><text class="th" x="547" y="218" text-anchor="middle" dominant-baseline="central">Narrow use</text><text class="ts" x="547" y="236" text-anchor="middle" dominant-baseline="central">General model, one job</text></g>
+<g class="c-amber"><rect x="469" y="256" width="156" height="40" rx="8" stroke-width="0.5"/><text class="t" x="547" y="276" text-anchor="middle" dominant-baseline="central">Alt-text script</text></g>
+<text class="th" x="340" y="442" text-anchor="middle" dominant-baseline="central">Narrow or agentic describes the job, not the model.</text>
+<text class="ts" x="340" y="464" text-anchor="middle" dominant-baseline="central">The same general model can be the agent or a one-job tool.</text>
+</svg>
+
+<h2>F. From AI to a model you can reach (chunk 0)</h2>
+<svg viewBox="0 0 680 476" role="img"><title>From AI to a model you can reach</title><desc>Artificial intelligence contains machine learning, which produces specialized models (one function) and general models (many tasks via instructions). Three doors (desktop app, command line, your script) reach the same model. Doors, not categories.</desc>
+<defs><marker id="arrowF" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="c-gray"><rect x="40" y="24" width="600" height="290" rx="20" stroke-width="0.5"/><text class="th" x="340" y="48" text-anchor="middle" dominant-baseline="central">Artificial intelligence</text><text class="ts" x="340" y="68" text-anchor="middle" dominant-baseline="central">Systems doing tasks that need judgment</text></g>
+<g class="c-purple"><rect x="70" y="88" width="540" height="206" rx="16" stroke-width="0.5"/><text class="th" x="340" y="110" text-anchor="middle" dominant-baseline="central">Machine learning</text><text class="ts" x="340" y="130" text-anchor="middle" dominant-baseline="central">Learns patterns from data, not hand-written rules</text></g>
+<g class="c-teal"><rect x="100" y="156" width="230" height="84" rx="8" stroke-width="0.5"/><text class="th" x="215" y="178" text-anchor="middle" dominant-baseline="central">Specialized models</text><text class="ts" x="215" y="198" text-anchor="middle" dominant-baseline="central">One function</text><text class="ts" x="215" y="220" text-anchor="middle" dominant-baseline="central">Captions, risk scores, OCR</text></g>
+<g class="c-amber"><rect x="350" y="156" width="230" height="84" rx="8" stroke-width="1"/><text class="th" x="465" y="178" text-anchor="middle" dominant-baseline="central">General models</text><text class="ts" x="465" y="198" text-anchor="middle" dominant-baseline="central">Many tasks via instructions</text><text class="ts" x="465" y="220" text-anchor="middle" dominant-baseline="central">Opus, GPT, Gemini</text></g>
+<text class="ts" x="340" y="268" text-anchor="middle" dominant-baseline="central">A model = the trained result: learned patterns, input to output</text>
+<g class="c-gray"><rect x="60" y="352" width="170" height="44" rx="8" stroke-width="0.5"/><text class="t" x="145" y="374" text-anchor="middle" dominant-baseline="central">Desktop app</text></g>
+<g class="c-gray"><rect x="255" y="352" width="170" height="44" rx="8" stroke-width="0.5"/><text class="t" x="340" y="374" text-anchor="middle" dominant-baseline="central">Command line</text></g>
+<g class="c-gray"><rect x="450" y="352" width="170" height="44" rx="8" stroke-width="0.5"/><text class="t" x="535" y="374" text-anchor="middle" dominant-baseline="central">Your script (API)</text></g>
+<line x1="145" y1="350" x2="420" y2="244" class="arr" marker-end="url(#arrowF)"/>
+<line x1="340" y1="350" x2="455" y2="244" class="arr" marker-end="url(#arrowF)"/>
+<line x1="535" y1="350" x2="490" y2="244" class="arr" marker-end="url(#arrowF)"/>
+<text class="th" x="340" y="430" text-anchor="middle" dominant-baseline="central">Doors, not categories.</text>
+<text class="ts" x="340" y="452" text-anchor="middle" dominant-baseline="central">The same model can sit behind each door.</text>
+</svg>
+
+<h2>G. Doors to the model: what each one gives you (chunk 0)</h2>
+<svg viewBox="0 0 680 404" role="img"><title>Doors to the model</title><desc>Four doors: chat app, assistant inside your tools, command line, your script (API), each with its capabilities. Saved setups (instructions, files, skills) ride on any door; custom GPTs and Gems are becoming skills. Same model; the door decides what it can reach.</desc>
+<g class="c-teal"><rect x="40" y="30" width="285" height="96" rx="12" stroke-width="0.5"/><text class="th" x="182" y="54" text-anchor="middle" dominant-baseline="central">Chat app</text><text class="ts" x="182" y="80" text-anchor="middle" dominant-baseline="central">Sandbox, connectors, projects</text><text class="ts" x="182" y="102" text-anchor="middle" dominant-baseline="central">Easiest start; vendor runs it</text></g>
+<g class="c-teal"><rect x="355" y="30" width="285" height="96" rx="12" stroke-width="0.5"/><text class="th" x="497" y="54" text-anchor="middle" dominant-baseline="central">Assistant inside your tools</text><text class="ts" x="497" y="80" text-anchor="middle" dominant-baseline="central">Copilot in Word, Gemini in Docs</text><text class="ts" x="497" y="102" text-anchor="middle" dominant-baseline="central">Works on the file you have open</text></g>
+<g class="c-teal"><rect x="40" y="146" width="285" height="96" rx="12" stroke-width="0.5"/><text class="th" x="182" y="170" text-anchor="middle" dominant-baseline="central">Command line</text><text class="ts" x="182" y="196" text-anchor="middle" dominant-baseline="central">Works on files on your computer</text><text class="ts" x="182" y="218" text-anchor="middle" dominant-baseline="central">Runs commands; for technical users</text></g>
+<g class="c-teal"><rect x="355" y="146" width="285" height="96" rx="12" stroke-width="0.5"/><text class="th" x="497" y="170" text-anchor="middle" dominant-baseline="central">Your script (API)</text><text class="ts" x="497" y="196" text-anchor="middle" dominant-baseline="central">Does exactly what you code</text><text class="ts" x="497" y="218" text-anchor="middle" dominant-baseline="central">One-job tool, workflow, or agent</text></g>
+<g class="c-purple"><rect x="40" y="266" width="600" height="60" rx="12" stroke-width="0.5"/><text class="th" x="340" y="286" text-anchor="middle" dominant-baseline="central">Saved setups ride on any door</text><text class="ts" x="340" y="308" text-anchor="middle" dominant-baseline="central">Instructions + files + skills. Custom GPTs and Gems are becoming skills.</text></g>
+<text class="th" x="340" y="358" text-anchor="middle" dominant-baseline="central">Same model. The door decides what it can reach.</text>
+<text class="ts" x="340" y="380" text-anchor="middle" dominant-baseline="central">Then the spectrum test decides what's happening.</text>
+</svg>
+
+<h2>H. Anatomy of a workflow (chunk 0/2)</h2>
+<svg viewBox="0 0 680 310" role="img"><title>Anatomy of a workflow</title><desc>A conductor (a script, a no-code flow, or a person with a checklist) runs four steps in a fixed order: extract images (script), describe image (model call), check length (script), save results (plain tool). The workflow is the fixed order, not the scripts.</desc>
+<defs><marker id="arrowH" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<g class="c-purple"><rect x="140" y="24" width="400" height="56" rx="8" stroke-width="1"/><text class="th" x="340" y="42" text-anchor="middle" dominant-baseline="central">Conductor: follows a fixed path</text><text class="ts" x="340" y="62" text-anchor="middle" dominant-baseline="central">A script, a no-code flow, or a person with a checklist</text></g>
+<line x1="340" y1="82" x2="340" y2="116" class="arr" marker-end="url(#arrowH)"/>
+<g class="c-teal"><rect x="40" y="120" width="135" height="56" rx="8" stroke-width="0.5"/><text class="th" x="107" y="138" text-anchor="middle" dominant-baseline="central">Extract images</text><text class="ts" x="107" y="158" text-anchor="middle" dominant-baseline="central">Script</text></g>
+<g class="c-amber"><rect x="195" y="120" width="135" height="56" rx="8" stroke-width="0.5"/><text class="th" x="262" y="138" text-anchor="middle" dominant-baseline="central">Describe image</text><text class="ts" x="262" y="158" text-anchor="middle" dominant-baseline="central">Model call</text></g>
+<g class="c-teal"><rect x="350" y="120" width="135" height="56" rx="8" stroke-width="0.5"/><text class="th" x="417" y="138" text-anchor="middle" dominant-baseline="central">Check length</text><text class="ts" x="417" y="158" text-anchor="middle" dominant-baseline="central">Script</text></g>
+<g class="c-gray"><rect x="505" y="120" width="135" height="56" rx="8" stroke-width="0.5"/><text class="th" x="572" y="138" text-anchor="middle" dominant-baseline="central">Save results</text><text class="ts" x="572" y="158" text-anchor="middle" dominant-baseline="central">Plain tool</text></g>
+<line x1="176" y1="148" x2="192" y2="148" class="arr" marker-end="url(#arrowH)"/>
+<line x1="331" y1="148" x2="347" y2="148" class="arr" marker-end="url(#arrowH)"/>
+<line x1="486" y1="148" x2="502" y2="148" class="arr" marker-end="url(#arrowH)"/>
+<path d="M40 188 L40 196 L640 196 L640 188" fill="none" stroke="var(--s)" stroke-width="0.5"/>
+<text class="ts" x="340" y="214" text-anchor="middle" dominant-baseline="central">Steps can be scripts, model calls, tools, or people</text>
+<text class="th" x="340" y="258" text-anchor="middle" dominant-baseline="central">The workflow is the fixed order, not the scripts.</text>
+<text class="ts" x="340" y="282" text-anchor="middle" dominant-baseline="central">Swap the conductor for the model and it becomes an agent.</text>
+</svg>
+
+<h2>I. Same steps, different conductor: workflow vs. skill vs. agent (chunk 0/2)</h2>
+<svg viewBox="0 0 680 400" role="img"><title>Same steps, different conductor</title><desc>Three columns with the same steps (gather, draft, check). Workflow: a script runs a fixed order, like a machine running a recipe. Guided agent: the model with a skill follows your how but can loop back, like a chef with your recipe card. Open agent: the model alone improvises, like a chef improvising. A skill guides the agent; a workflow replaces it.</desc>
+<defs><marker id="arrowI" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="th" x="133" y="26" text-anchor="middle" dominant-baseline="central">Workflow</text>
+<text class="th" x="340" y="26" text-anchor="middle" dominant-baseline="central">Guided agent</text>
+<text class="th" x="547" y="26" text-anchor="middle" dominant-baseline="central">Open agent</text>
+<g class="c-gray"><rect x="40" y="44" width="186" height="56" rx="8" stroke-width="0.5"/><text class="th" x="133" y="62" text-anchor="middle" dominant-baseline="central">Script conducts</text><text class="ts" x="133" y="82" text-anchor="middle" dominant-baseline="central">Runs a fixed order</text></g>
+<g class="c-amber"><rect x="247" y="44" width="186" height="56" rx="8" stroke-width="0.5"/><text class="th" x="340" y="62" text-anchor="middle" dominant-baseline="central">Model + skill</text><text class="ts" x="340" y="82" text-anchor="middle" dominant-baseline="central">Follows your how</text></g>
+<g class="c-purple"><rect x="454" y="44" width="186" height="56" rx="8" stroke-width="0.5"/><text class="th" x="547" y="62" text-anchor="middle" dominant-baseline="central">Model alone</text><text class="ts" x="547" y="82" text-anchor="middle" dominant-baseline="central">Improvises the how</text></g>
+<line x1="133" y1="102" x2="133" y2="130" class="arr" marker-end="url(#arrowI)"/>
+<line x1="340" y1="102" x2="340" y2="130" class="arr" marker-end="url(#arrowI)"/>
+<line x1="547" y1="102" x2="547" y2="130" class="arr" marker-end="url(#arrowI)"/>
+<g class="c-teal"><rect x="63" y="134" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="133" y="152" text-anchor="middle" dominant-baseline="central">Gather</text></g>
+<g class="c-teal"><rect x="63" y="186" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="133" y="204" text-anchor="middle" dominant-baseline="central">Draft</text></g>
+<g class="c-teal"><rect x="63" y="238" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="133" y="256" text-anchor="middle" dominant-baseline="central">Check</text></g>
+<line x1="133" y1="171" x2="133" y2="184" class="arr" marker-end="url(#arrowI)"/>
+<line x1="133" y1="223" x2="133" y2="236" class="arr" marker-end="url(#arrowI)"/>
+<g class="c-teal"><rect x="270" y="134" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="340" y="152" text-anchor="middle" dominant-baseline="central">Gather</text></g>
+<g class="c-teal"><rect x="270" y="186" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="340" y="204" text-anchor="middle" dominant-baseline="central">Draft</text></g>
+<g class="c-teal"><rect x="270" y="238" width="140" height="36" rx="8" stroke-width="0.5"/><text class="t" x="340" y="256" text-anchor="middle" dominant-baseline="central">Check</text></g>
+<line x1="340" y1="171" x2="340" y2="184" class="arr" marker-end="url(#arrowI)"/>
+<line x1="340" y1="223" x2="340" y2="236" class="arr" marker-end="url(#arrowI)"/>
+<path d="M270 256 L256 256 L256 204 L266 204" fill="none" class="arr" marker-end="url(#arrowI)"/>
+<g class="c-teal"><rect x="477" y="134" width="140" height="36" rx="8" stroke-width="0.5" stroke-dasharray="4 3"/><text class="t" x="547" y="152" text-anchor="middle" dominant-baseline="central">Gather</text></g>
+<g class="c-teal"><rect x="477" y="186" width="140" height="36" rx="8" stroke-width="0.5" stroke-dasharray="4 3"/><text class="t" x="547" y="204" text-anchor="middle" dominant-baseline="central">Draft</text></g>
+<g class="c-teal"><rect x="477" y="238" width="140" height="36" rx="8" stroke-width="0.5" stroke-dasharray="4 3"/><text class="t" x="547" y="256" text-anchor="middle" dominant-baseline="central">Check</text></g>
+<line x1="547" y1="171" x2="547" y2="184" class="arr" marker-end="url(#arrowI)"/>
+<line x1="547" y1="223" x2="547" y2="236" class="arr" marker-end="url(#arrowI)"/>
+<path d="M477 256 L463 256 L463 152 L473 152" fill="none" class="arr" marker-end="url(#arrowI)"/>
+<path d="M617 204 L631 204 L631 152 L621 152" fill="none" class="arr" marker-end="url(#arrowI)"/>
+<text class="ts" x="133" y="294" text-anchor="middle" dominant-baseline="central">Machine running a recipe</text>
+<text class="ts" x="340" y="294" text-anchor="middle" dominant-baseline="central">Chef with your recipe card</text>
+<text class="ts" x="547" y="294" text-anchor="middle" dominant-baseline="central">Chef improvising</text>
+<line x1="60" y1="318" x2="616" y2="318" class="arr" marker-end="url(#arrowI)"/>
+<text class="ts" x="60" y="334" dominant-baseline="central">Less autonomy</text>
+<text class="ts" x="616" y="334" text-anchor="end" dominant-baseline="central">More autonomy</text>
+<text class="th" x="340" y="362" text-anchor="middle" dominant-baseline="central">A skill guides the agent. A workflow replaces it.</text>
+<text class="ts" x="340" y="384" text-anchor="middle" dominant-baseline="central">Same steps. What changes is who conducts.</text>
+</svg>
+<h2>J. Someone always conducts the work: four modes (chunk 3, unifying visual)</h2>
+<svg viewBox="0 0 680 418" role="img"><title>Someone always conducts the work</title><desc>Four modes, each defined by who conducts (orchestrates) the work. Chat: you conduct. Workflow: a script conducts a fixed list of steps. Guided agent: the model conducts following a skill. Open agent: the model conducts alone. Someone has to conduct: you, a script, or the model.</desc>
+<defs><marker id="arrowJ" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="th" x="340" y="26" text-anchor="middle" dominant-baseline="central">Someone always conducts the work</text>
+<text class="ts" x="340" y="46" text-anchor="middle" dominant-baseline="central">Conductor = orchestrator: whoever decides the next step</text>
+<g class="c-gray"><rect x="40" y="68" width="142" height="232" rx="12" stroke-width="0.5"/><text class="th" x="111" y="166" text-anchor="middle" dominant-baseline="central">Chat</text><text class="ts" x="111" y="188" text-anchor="middle" dominant-baseline="central">You conduct</text><text class="ts" x="111" y="218" text-anchor="middle" dominant-baseline="central">AI answers turns</text><text class="ts" x="111" y="238" text-anchor="middle" dominant-baseline="central">You act and check</text><text class="ts" x="111" y="258" text-anchor="middle" dominant-baseline="central">You decide next</text></g>
+<g class="c-teal"><rect x="193" y="68" width="142" height="232" rx="12" stroke-width="0.5"/><text class="th" x="264" y="166" text-anchor="middle" dominant-baseline="central">Workflow</text><text class="ts" x="264" y="188" text-anchor="middle" dominant-baseline="central">A script conducts</text><text class="ts" x="264" y="218" text-anchor="middle" dominant-baseline="central">Fixed list of steps</text><text class="ts" x="264" y="238" text-anchor="middle" dominant-baseline="central">Scripts + AI calls</text><text class="ts" x="264" y="258" text-anchor="middle" dominant-baseline="central">Same order always</text></g>
+<g class="c-amber"><rect x="346" y="68" width="142" height="232" rx="12" stroke-width="0.5"/><text class="th" x="417" y="166" text-anchor="middle" dominant-baseline="central">Guided agent</text><text class="ts" x="417" y="188" text-anchor="middle" dominant-baseline="central">Model + skill</text><text class="ts" x="417" y="218" text-anchor="middle" dominant-baseline="central">Follows your how</text><text class="ts" x="417" y="238" text-anchor="middle" dominant-baseline="central">Adapts when needed</text><text class="ts" x="417" y="258" text-anchor="middle" dominant-baseline="central">Asks at checkpoints</text></g>
+<g class="c-purple"><rect x="499" y="68" width="142" height="232" rx="12" stroke-width="1"/><text class="th" x="570" y="166" text-anchor="middle" dominant-baseline="central">Open agent</text><text class="ts" x="570" y="188" text-anchor="middle" dominant-baseline="central">Model conducts</text><text class="ts" x="570" y="218" text-anchor="middle" dominant-baseline="central">Chooses its steps</text><text class="ts" x="570" y="238" text-anchor="middle" dominant-baseline="central">Loops until done</text><text class="ts" x="570" y="258" text-anchor="middle" dominant-baseline="central">Needs most trust</text></g>
+<g fill="none" stroke="var(--s)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="111" cy="104" r="8"/><path d="M95 134 Q111 112 127 134"/>
+<rect x="250" y="96" width="28" height="38" rx="3"/><line x1="256" y1="106" x2="272" y2="106"/><line x1="256" y1="115" x2="272" y2="115"/><line x1="256" y1="124" x2="268" y2="124"/>
+<rect x="397" y="98" width="24" height="24" rx="4"/><line x1="403" y1="94" x2="403" y2="98"/><line x1="415" y1="94" x2="415" y2="98"/><line x1="403" y1="122" x2="403" y2="126"/><line x1="415" y1="122" x2="415" y2="126"/><line x1="393" y1="104" x2="397" y2="104"/><line x1="393" y1="116" x2="397" y2="116"/>
+<rect x="425" y="112" width="16" height="22" rx="2"/><line x1="429" y1="119" x2="437" y2="119"/><line x1="429" y1="126" x2="437" y2="126"/>
+<rect x="558" y="100" width="24" height="24" rx="4"/><line x1="564" y1="96" x2="564" y2="100"/><line x1="576" y1="96" x2="576" y2="100"/><line x1="564" y1="124" x2="564" y2="128"/><line x1="576" y1="124" x2="576" y2="128"/><line x1="554" y1="106" x2="558" y2="106"/><line x1="554" y1="118" x2="558" y2="118"/><line x1="582" y1="106" x2="586" y2="106"/><line x1="582" y1="118" x2="586" y2="118"/>
+<path d="M596 88 L598 94 L604 96 L598 98 L596 104 L594 98 L588 96 L594 94 Z"/>
+</g>
+<line x1="60" y1="322" x2="620" y2="322" class="arr" marker-end="url(#arrowJ)"/>
+<text class="ts" x="60" y="340" dominant-baseline="central">Less AI autonomy</text>
+<text class="ts" x="620" y="340" text-anchor="end" dominant-baseline="central">More AI autonomy</text>
+<text class="th" x="340" y="374" text-anchor="middle" dominant-baseline="central">Someone has to conduct: you, a script, or the model.</text>
+<text class="ts" x="340" y="396" text-anchor="middle" dominant-baseline="central">Ask: who is conducting right now?</text>
+</svg>
+<h2>K. More AI control, more risk, unless you shape it (chunk 5, cautions)</h2>
+<svg viewBox="0 0 680 482" role="img"><title>More AI control, more risk, unless you shape it</title><desc>Risk (how far a mistake can travel before a person sees it) rises as the AI conducts more: chat, workflow, guided agent, open agent. Left open, it rises steeply; with guardrails, gently. The gap is your strategy. Levers: clear brief, skill, reference docs, checkpoints, least access. Guardrails lower risk; they never remove it.</desc>
+<defs><marker id="arrowK" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text class="th" x="340" y="22" text-anchor="middle" dominant-baseline="central">More AI control, more risk, unless you shape it</text>
+<text class="ts" x="340" y="42" text-anchor="middle" dominant-baseline="central">Risk = how far a mistake can travel before a person sees it</text>
+<line x1="90" y1="300" x2="90" y2="78" class="arr" marker-end="url(#arrowK)"/>
+<text class="ts" x="90" y="66" text-anchor="middle" dominant-baseline="central">Risk</text>
+<line x1="90" y1="300" x2="628" y2="300" class="arr" marker-end="url(#arrowK)"/>
+<path d="M110 270 C 300 258, 450 185, 610 92" fill="none" stroke="var(--s)" stroke-width="2" stroke-dasharray="6 5"/>
+<text class="ts" x="606" y="78" text-anchor="end" dominant-baseline="central">Left open: vague goal, broad access</text>
+<path d="M110 278 C 300 274, 450 246, 610 210" fill="none" stroke="var(--s)" stroke-width="2.5"/>
+<text class="ts" x="606" y="228" text-anchor="end" dominant-baseline="central">With guardrails</text>
+<line x1="560" y1="128" x2="560" y2="208" class="arr" marker-start="url(#arrowK)" marker-end="url(#arrowK)"/>
+<text class="th" x="570" y="160" dominant-baseline="central">Your</text>
+<text class="th" x="570" y="178" dominant-baseline="central">strategy</text>
+<text class="th" x="150" y="318" text-anchor="middle" dominant-baseline="central">Chat</text>
+<text class="th" x="290" y="318" text-anchor="middle" dominant-baseline="central">Workflow</text>
+<text class="th" x="430" y="318" text-anchor="middle" dominant-baseline="central">Guided agent</text>
+<text class="th" x="570" y="318" text-anchor="middle" dominant-baseline="central">Open agent</text>
+<text class="ts" x="150" y="338" text-anchor="middle" dominant-baseline="central">You conduct</text>
+<text class="ts" x="290" y="338" text-anchor="middle" dominant-baseline="central">A script</text>
+<text class="ts" x="430" y="338" text-anchor="middle" dominant-baseline="central">Model + skill</text>
+<text class="ts" x="570" y="338" text-anchor="middle" dominant-baseline="central">Model alone</text>
+<text class="ts" x="360" y="360" text-anchor="middle" dominant-baseline="central">How much the AI conducts</text>
+<text class="th" x="340" y="392" text-anchor="middle" dominant-baseline="central">Levers that lower the curve</text>
+<g class="c-teal"><rect x="40" y="408" width="108" height="36" rx="8" stroke-width="0.5"/><text class="ts" x="94" y="426" text-anchor="middle" dominant-baseline="central">Clear brief</text></g>
+<g class="c-teal"><rect x="163" y="408" width="108" height="36" rx="8" stroke-width="0.5"/><text class="ts" x="217" y="426" text-anchor="middle" dominant-baseline="central">Skill</text></g>
+<g class="c-teal"><rect x="286" y="408" width="108" height="36" rx="8" stroke-width="0.5"/><text class="ts" x="340" y="426" text-anchor="middle" dominant-baseline="central">Reference docs</text></g>
+<g class="c-teal"><rect x="409" y="408" width="108" height="36" rx="8" stroke-width="0.5"/><text class="ts" x="463" y="426" text-anchor="middle" dominant-baseline="central">Checkpoints</text></g>
+<g class="c-teal"><rect x="532" y="408" width="108" height="36" rx="8" stroke-width="0.5"/><text class="ts" x="586" y="426" text-anchor="middle" dominant-baseline="central">Least access</text></g>
+<text class="ts" x="340" y="466" text-anchor="middle" dominant-baseline="central">Guardrails lower risk. They never remove it.</text>
+</svg>
+</body>
+</html>
