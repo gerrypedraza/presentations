@@ -17,6 +17,11 @@
   .card { border:1px solid var(--sand); border-left:.35rem solid var(--maroon); border-radius:.4rem; padding:1rem 1.2rem; margin-bottom:1rem; }
   .card h3 { margin:0 0 .3rem; font-size:1.15rem; }
   .card p { margin:.3rem 0; color:var(--muted); }
+  .card { display:grid; grid-template-columns:12rem 1fr; gap:1.1rem; align-items:start; }
+  .card .thumb { width:100%; height:auto; aspect-ratio:16/9; object-fit:cover; display:block;
+    border:1px solid var(--sand); border-radius:.25rem; background:#f3f1ea; }
+  .card .body { min-width:0; }
+  @media (max-width:36rem) { .card { grid-template-columns:1fr; } .card .thumb { max-width:20rem; } }
   a { color:var(--maroon); text-underline-offset:.15em; }
   a:focus-visible { outline:3px solid #1a5fb4; outline-offset:2px; }
   footer { padding:1.5rem 1rem 3rem; color:var(--muted); font-size:.9rem; border-top:1px solid var(--sand); }
@@ -32,33 +37,48 @@
 <main>
   <h2>Presentations</h2>
   <div class="card">
-    <h3><a href="slides/accessible-media-overview/">Accessible Media: Beyond the Checker</a></h3>
-    <p>Why a document can pass an accessibility checker and still fail students, and what to do about it.</p>
-    <p>Opens in any browser. Use the arrow keys to move between slides, press H for a handout view of all slides, and G for the glossary.</p>
+    <img class="thumb" src="images/thumbs/accessible-media.jpg" alt="" width="640" height="360" loading="lazy">
+    <div class="body">
+      <h3><a href="slides/accessible-media-overview/">Accessible Media: Beyond the Checker</a></h3>
+      <p>Why a document can pass an accessibility checker and still fail students, and what to do about it.</p>
+      <p>Opens in any browser. Use the arrow keys to move between slides, press H for a handout view of all slides, and G for the glossary.</p>
+    </div>
   </div>
   <div class="card">
-    <h3><a href="slides/agentic-ai/">Agentic AI</a> (draft)</h3>
-    <p>A shared vocabulary for the eSAIL team: what agentic AI is, who&rsquo;s conducting the work, and how to use it well and safely.</p>
-    <p>Work in progress. Opens in any browser; press H for the handout view and G for the glossary.</p>
+    <img class="thumb" src="images/thumbs/agentic-ai.jpg" alt="" width="640" height="360" loading="lazy">
+    <div class="body">
+      <h3><a href="slides/agentic-ai/">Agentic AI</a> (draft)</h3>
+      <p>A shared vocabulary for the eSAIL team: what agentic AI is, who&rsquo;s conducting the work, and how to use it well and safely.</p>
+      <p>Work in progress. Opens in any browser; press H for the handout view and G for the glossary.</p>
+    </div>
   </div>
 
   <h2>Related Applications</h2>
   <div class="card">
-    <h3><a href="https://beam2ltx.gerrypedraza.com/">Beamer to LTX Converter</a></h3>
-    <p>Turns existing LaTeX Beamer slide decks into tagged, accessible PDF presentations by converting them to the ltx-talk class, so you can keep your course content instead of rebuilding it.</p>
-    <p>Web app, currently in beta. Sign in with a Google or approved .edu account; avoid uploading confidential material.</p>
+    <img class="thumb" src="images/thumbs/beamer-converter.svg" alt="" width="640" height="360" loading="lazy">
+    <div class="body">
+      <h3><a href="https://beam2ltx.gerrypedraza.com/">Beamer to LTX Converter</a></h3>
+      <p>Turns existing LaTeX Beamer slide decks into tagged, accessible PDF presentations by converting them to the ltx-talk class, so you can keep your course content instead of rebuilding it.</p>
+      <p>Web app, currently in beta. Sign in with a Google or approved .edu account; avoid uploading confidential material.</p>
+    </div>
   </div>
 
   <h2>Templates &amp; Examples</h2>
   <div class="card">
-    <h3><a href="templates-and-examples/latex/latex-accessible-template.tex">LaTeX Accessible Template</a></h3>
-    <p>A LaTeX preamble that produces a tagged PDF 2.0 file meeting PDF/UA-2, with equations stored as MathML.</p>
-    <p>Start your document from it and compile with LuaLaTeX (on Overleaf, choose the Rolling TeX Live version).</p>
+    <img class="thumb" src="images/thumbs/latex-template.svg" alt="" width="640" height="360" loading="lazy">
+    <div class="body">
+      <h3><a href="templates-and-examples/latex/latex-accessible-template.tex">LaTeX Accessible Template</a></h3>
+      <p>A LaTeX preamble that produces a tagged PDF 2.0 file meeting PDF/UA-2, with equations stored as MathML.</p>
+      <p>Start your document from it and compile with LuaLaTeX (on Overleaf, choose the Rolling TeX Live version).</p>
+    </div>
   </div>
   <div class="card">
-    <h3><a href="templates-and-examples/latex/accessible-template-example-in-use.pdf">Accessible Template Example In Use</a></h3>
-    <p>A full document built on the template, with headings, lists, tables, figures with alt text, equations, and decorative content. Opens the finished PDF (PDF 2.0, PDF/UA-2).</p>
-    <p><a href="templates-and-examples/latex/accessible-template-example-in-use.zip">Download the source (.zip)</a>: the LaTeX file and its images folder, ready to upload to Overleaf.</p>
+    <img class="thumb" src="images/thumbs/template-example.jpg" alt="" width="640" height="360" loading="lazy">
+    <div class="body">
+      <h3><a href="templates-and-examples/latex/accessible-template-example-in-use.pdf">Accessible Template Example In Use</a></h3>
+      <p>A full document built on the template, with headings, lists, tables, figures with alt text, equations, and decorative content. Opens the finished PDF (PDF 2.0, PDF/UA-2).</p>
+      <p><a href="templates-and-examples/latex/accessible-template-example-in-use.zip">Download the source (.zip)</a>: the LaTeX file and its images folder, ready to upload to Overleaf.</p>
+    </div>
   </div>
 </main>
 </body>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <rect width="640" height="360" fill="#f3f1ea"/>
+  <g font-family="ui-monospace, Consolas, 'Courier New', monospace">
+    <rect x="120" y="40" width="400" height="280" rx="10" fill="#202020"/>
+    <circle cx="146" cy="64" r="7" fill="#732f2f"/><circle cx="168" cy="64" r="7" fill="#707070"/><circle cx="190" cy="64" r="7" fill="#d6d3c4"/>
+    <text x="146" y="118" font-size="22"><tspan fill="#ff9e9e">\DocumentMetadata</tspan><tspan fill="#ffd479">{</tspan></text>
+    <text x="172" y="152" font-size="22" fill="#e6e6e6">pdfstandard=ua-2,</text>
+    <text x="172" y="186" font-size="22" fill="#e6e6e6">tagging=on</text>
+    <text x="146" y="220" font-size="22" fill="#ffd479">}</text>
+    <text x="146" y="262" font-size="22"><tspan fill="#ff9e9e">\documentclass</tspan><tspan fill="#ffd479">{</tspan><tspan fill="#e6e6e6">article</tspan><tspan fill="#ffd479">}</tspan></text>
+    <text x="146" y="296" font-size="22" fill="#9fb3c8" font-style="italic">% PDF/UA-2 + MathML</text>
+  </g>
+</svg>
